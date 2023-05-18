@@ -3,6 +3,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import { useSelector } from 'react-redux';
 import authReducer from './auth/slice';
 import redirectReducer from './redirect/slice';
+import sidebarReducer from './sidebar/slice';
 import storage from 'redux-persist/lib/storage';
 import themeReducer from './theme/slice';
 import thunkMiddleware from 'redux-thunk';
@@ -11,12 +12,13 @@ import type { TypedUseSelectorHook } from 'react-redux';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth', 'redirect', 'theme']
+  whitelist: ['auth', 'redirect', 'theme', 'sidebar']
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
   redirect: redirectReducer,
+  sidebar: sidebarReducer,
   theme: themeReducer
 });
 

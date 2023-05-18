@@ -12,4 +12,7 @@ export * from './generic-filter';
 export * from './heading';
 export * from './toggle-theme';
 export * from './textarea';
+export * from './query-manager';
+export * from './cards';
+export * from './toggle-menu';
 export * from './validate-password';

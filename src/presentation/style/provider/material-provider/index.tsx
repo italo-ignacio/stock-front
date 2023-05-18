@@ -3,8 +3,8 @@
 /* eslint-disable max-lines */
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { colors } from 'presentation/style/palette';
-import { getTheme } from 'store/theme/selector';
 import { outlinedInputClasses } from '@mui/material';
+import { useTheme } from 'store/theme/selector';
 import type { FC, ReactNode } from 'react';
 
 declare module '@mui/material/Button' {
@@ -42,12 +42,17 @@ interface Children {
 export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
   const LightTheme = createTheme({
     components: {
+      MuiButton: {
+        defaultProps: {
+          variant: 'contained'
+        }
+      },
       MuiTextField: {
         styleOverrides: {
           root: {
             '& input:-webkit-autofill': {
               '-webkit-box-shadow': '0 0 0 1000px transparent inset !important',
-              transition: 'background-color 1s ease-in-out 0s'
+              transition: 'background-color 10000s ease-in-out 0s'
             }
           }
         }
@@ -70,6 +75,11 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
 
   const DarkTheme = createTheme({
     components: {
+      MuiButton: {
+        defaultProps: {
+          variant: 'contained'
+        }
+      },
       MuiOutlinedInput: {
         styleOverrides: {
           notchedOutline: {
@@ -126,6 +136,6 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
   });
 
   return (
-    <ThemeProvider theme={getTheme() === 'dark' ? DarkTheme : LightTheme}>{children}</ThemeProvider>
+    <ThemeProvider theme={useTheme() === 'dark' ? DarkTheme : LightTheme}>{children}</ThemeProvider>
   );
 };

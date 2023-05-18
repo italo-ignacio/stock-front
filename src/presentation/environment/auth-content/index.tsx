@@ -1,5 +1,5 @@
 import { ListItemButton, Paper } from '@mui/material';
-import { LoginForm, RegisterForm } from 'presentation/atomic-component/molecule';
+import { LoginForm, RegisterForm } from 'presentation/atomic-component/molecule/form';
 import { ToggleTheme } from 'presentation/atomic-component/atom';
 import { useState } from 'react';
 import type { FC } from 'react';

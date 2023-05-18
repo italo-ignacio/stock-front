@@ -1,7 +1,16 @@
-export enum paths {
+export enum routePaths {
   dashboard = '/dashboard',
-  login = '/'
+  login = '/',
+  myFleets = '/minhas-frotas',
+  fleet = '/minhas-frotas/:id'
 }
+
+export const paths = {
+  dashboard: '/dashboard',
+  fleet: (id: string): string => `/minhas-frotas/${id}`,
+  login: '/',
+  myFleets: '/minhas-frotas'
+};
 
 export const apiPaths = {
   account: {
@@ -12,5 +21,7 @@ export const apiPaths = {
     auth: '/auth/driver',
     register: '/driver'
   },
-  refreshToken: '/refresh-token'
+  refreshToken: '/auth/refresh-token',
+  vehicle: '/vehicle',
+  vehicleFleet: '/vehicle-fleet'
 };

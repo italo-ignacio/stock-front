@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { Button, Fade } from '@mui/material';
 import type { FC, ReactNode } from 'react';
 
@@ -17,7 +16,7 @@ export const QueryManager: FC<QueryManagerProps> = ({ query, children, hideError
   if (query.isError && !hideError)
     return (
       <Fade in>
-        <div className={'h-full w-full '}>
+        <div className={'h-full w-full items-center justify-center'}>
           <h1>Parece que houve um erro ao carregar os dados.</h1>
 
           <Button

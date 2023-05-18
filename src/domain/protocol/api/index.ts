@@ -1,10 +1,8 @@
-import type { apiPaths } from 'main/config';
-
 export interface ApiProps {
-  route: apiPaths | string;
+  route: unknown;
   body?: unknown;
   id?: number | string;
   method?: 'DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT';
-  queryParams?: URLSearchParams;
+  queryParams?: unknown;
   isFormData?: boolean;
 }

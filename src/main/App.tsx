@@ -1,22 +1,22 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
-import { dimensions } from './config/dimensions';
-import { getTheme } from 'store/theme/selector';
+import { dimensions } from './config';
 import { queryClient } from 'infra/lib';
 import { useEffect } from 'react';
+import { useTheme } from 'store/theme/selector';
 import { useWindowDimensions } from 'data/hooks';
 import Router from './routes';
 import type { FC } from 'react';
 
 const App: FC = () => {
   const { width } = useWindowDimensions();
-  const theme = getTheme();
+  const theme = useTheme();
 
   useEffect(() => {
-    const root = document.getElementById('root');
+    const body = document.getElementById('body');
 
-    if (root) root.setAttribute('data-mode', theme);
+    if (body) body.setAttribute('data-mode', theme);
   }, [theme]);
 
   return (
@@ -32,11 +32,11 @@ const App: FC = () => {
         hideProgressBar={false}
         limit={4}
         pauseOnHover
-        position={width >= dimensions.laptop ? 'bottom-right' : 'top-right'}
+        position={width >= dimensions.laptop ? 'top-right' : 'top-right'}
         style={{
           padding: '12px'
         }}
-        theme={getTheme()}
+        theme={useTheme()}
       />
     </QueryClientProvider>
   );

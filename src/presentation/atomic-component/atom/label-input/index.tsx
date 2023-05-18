@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { IconButton, TextField } from '@mui/material';
 import { colors } from 'presentation/style';
-import { getTheme } from 'store/theme/selector';
+import { useTheme } from 'store/theme/selector';
 import type { FC, ReactNode } from 'react';
 import type { OverridableComponent } from '@mui/types';
 import type { SvgIconTypeMap } from '@mui/material';
@@ -28,10 +28,14 @@ interface LabelInputProps {
 }
 
 export const LabelInput: FC<LabelInputProps> = ({ register, children, ...props }) => {
-  const theme = getTheme();
+  const theme = useTheme();
 
   return (
-    <div className={`flex ${props.isRow ? 'gap-5' : 'flex-col'} w-full text-start`}>
+    <div
+      className={`flex ${
+        props.isRow ? 'gap-5 items-center' : 'flex-col'
+      } w-full text-start dark:text-white`}
+    >
       {props.label ? (
         <label className={'mb-[2px] min-w-max'}>
           {props.label}

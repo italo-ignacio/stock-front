@@ -52,7 +52,7 @@ export const fetchApi = async <T>(params: ApiProps, url?: string): Promise<T> =>
 
   const response = await fetch(
     `${url ?? baseUrl}${params.route}${params.id ? `/${params.id}` : ''}${
-      params.queryParams ? `?${new URLSearchParams(params.queryParams)}` : ''
+      params.queryParams ? `?${new URLSearchParams(params.queryParams as URLSearchParams)}` : ''
     }`,
     {
       body: params.isFormData

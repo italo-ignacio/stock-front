@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { Box, Button, IconButton, Modal as ModalUI } from '@mui/material';
 import { Heading } from 'presentation/atomic-component/atom/heading';
 import CloseIcon from '@mui/icons-material/Close';
@@ -20,6 +21,7 @@ interface ModalProps {
   title?: string;
   openModalElement?: ReactNode;
   size?: 'full' | 'large' | 'medium' | 'small';
+  disableBackdrop?: boolean;
 }
 
 const sizes = {
@@ -30,8 +32,6 @@ const sizes = {
 
 const getWidth = (size?: 'full' | 'large' | 'medium' | 'small'): number | string => {
   switch (size) {
-    case 'full':
-      return 'auto';
     case 'large':
       return sizes.large;
     case 'medium':
@@ -39,7 +39,7 @@ const getWidth = (size?: 'full' | 'large' | 'medium' | 'small'): number | string
     case 'small':
       return sizes.small;
     default:
-      return 'auto';
+      return 'max-content';
   }
 };
 
@@ -59,26 +59,34 @@ export const Modal: FC<ModalProps> = ({ children, openModal, closeModal, ...prop
       props.openModalElement
     )}
 
-    <ModalUI onClose={closeModal} open={props.isOpen}>
-      <Box
-        className={
-          'bg-white p-6 rounded-md flex flex-col gap-4 left-[50%] top-[50%] absolute translate-y-[-50%] translate-x-[-50%] max-h-[96vh] max-w-[98%] overflow-auto'
-        }
-        sx={{ width: getWidth(props.size) }}
-      >
-        {props.title ? (
-          <Heading
-            endElement={
-              <IconButton onClick={closeModal}>
-                <CloseIcon color={'error'} />
-              </IconButton>
-            }
-            title={props.title}
-          />
+    <ModalUI hideBackdrop={props.disableBackdrop} onClose={closeModal} open={props.isOpen}>
+      <>
+        {props.disableBackdrop ? (
+          <div className={'absolute overflow-hidden top-0 left-0 w-full h-screen bg-[#0000007f]'} />
         ) : null}
 
-        {children}
-      </Box>
+        <Box
+          className={
+            'bg-white dark:bg-gray-900 p-6 rounded-md flex flex-col gap-4 left-[50%] top-[50%] absolute translate-y-[-50%] translate-x-[-50%] max-h-[96vh] max-w-[90%] laptop:max-w-[98%] overflow-auto'
+          }
+          sx={{
+            width: getWidth(props.size)
+          }}
+        >
+          {props.title ? (
+            <Heading
+              endElement={
+                <IconButton onClick={closeModal}>
+                  <CloseIcon color={'error'} />
+                </IconButton>
+              }
+              title={props.title}
+            />
+          ) : null}
+
+          {children}
+        </Box>
+      </>
     </ModalUI>
   </>
 );
