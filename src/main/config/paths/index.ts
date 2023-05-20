@@ -2,12 +2,12 @@ export enum routePaths {
   dashboard = '/dashboard',
   login = '/',
   myFleets = '/minhas-frotas',
-  fleet = '/minhas-frotas/:id'
+  fleet = '/minhas-frotas/:fleetId'
 }
 
 export const paths = {
   dashboard: '/dashboard',
-  fleet: (id: string): string => `/minhas-frotas/${id}`,
+  fleet: (fleetId: string): string => `/minhas-frotas/${fleetId}`,
   login: '/',
   myFleets: '/minhas-frotas'
 };

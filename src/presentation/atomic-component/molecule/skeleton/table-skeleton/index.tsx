@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { PaginationSkeleton } from 'presentation/atomic-component/molecule/skeleton/pagination-skeleton';
 import { Skeleton } from '@mui/material';
 import type { FC } from 'react';

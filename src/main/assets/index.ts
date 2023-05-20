@@ -1,1 +1,1 @@
-export { default as SelectImage } from './select-image.svg';
+export { default as SelectImageSvg } from './select-image.svg';

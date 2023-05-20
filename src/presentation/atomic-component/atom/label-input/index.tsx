@@ -1,5 +1,4 @@
 /* eslint-disable no-nested-ternary */
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { IconButton, TextField } from '@mui/material';
 import { colors } from 'presentation/style';
 import { useTheme } from 'store/theme/selector';

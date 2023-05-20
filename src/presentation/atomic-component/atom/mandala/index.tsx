@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { ArcElement, Chart as ChartJS } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { colors } from 'presentation/style';

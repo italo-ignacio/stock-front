@@ -32,7 +32,7 @@ const App: FC = () => {
         hideProgressBar={false}
         limit={4}
         pauseOnHover
-        position={width >= dimensions.laptop ? 'top-right' : 'top-right'}
+        position={width >= dimensions.laptop ? 'bottom-right' : 'bottom-right'}
         style={{
           padding: '12px'
         }}

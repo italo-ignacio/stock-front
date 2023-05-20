@@ -20,14 +20,12 @@ module.exports = {
           width: '6px'
         },
         '*::-webkit-scrollbar-thumb': {
-          backgroundColor: 'transparent',
+          backgroundColor: '#00000063',
           borderRadius: '10px'
         },
         '*::-webkit-scrollbar-track-piece': {
           backgroundColor: 'transparent',
-          borderRadius: '10px',
-          marginBottom: '0.2rem',
-          marginTop: '0.2rem'
+          borderRadius: '10px'
         }
       });
     })

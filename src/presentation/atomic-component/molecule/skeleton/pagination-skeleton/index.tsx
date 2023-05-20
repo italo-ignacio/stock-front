@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { Skeleton } from '@mui/material';
 import type { FC } from 'react';
 

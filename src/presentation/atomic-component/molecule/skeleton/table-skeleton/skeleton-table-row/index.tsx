@@ -1,7 +1,6 @@
 import { Skeleton, TableCell, TableRow } from '@mui/material';
 import type { FC } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 export const SkeletonTableRow: FC<{ quantity?: number }> = ({ quantity = 1 }) => (
   <TableRow key={quantity}>
     {Array.from(Array(quantity), (event, id) => (

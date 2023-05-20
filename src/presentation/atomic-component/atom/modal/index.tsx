@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { Box, Button, IconButton, Modal as ModalUI } from '@mui/material';
 import { Heading } from 'presentation/atomic-component/atom/heading';
-import CloseIcon from '@mui/icons-material/Close';
+
+import { Close } from '@mui/icons-material';
 import type { FC, ReactNode } from 'react';
 import type { OverridableComponent } from '@mui/types';
 import type { SvgIconTypeMap } from '@mui/material';
@@ -20,7 +20,7 @@ interface ModalProps {
   };
   title?: string;
   openModalElement?: ReactNode;
-  size?: 'full' | 'large' | 'medium' | 'small';
+  size?: string | 'full' | 'large' | 'medium' | 'small';
   disableBackdrop?: boolean;
 }
 
@@ -30,7 +30,7 @@ const sizes = {
   small: 590
 };
 
-const getWidth = (size?: 'full' | 'large' | 'medium' | 'small'): number | string => {
+const getWidth = (size?: string | 'full' | 'large' | 'medium' | 'small'): number | string => {
   switch (size) {
     case 'large':
       return sizes.large;
@@ -38,7 +38,10 @@ const getWidth = (size?: 'full' | 'large' | 'medium' | 'small'): number | string
       return sizes.medium;
     case 'small':
       return sizes.small;
+    case 'full':
+      return 'max-content';
     default:
+      if (size) return size;
       return 'max-content';
   }
 };
@@ -67,7 +70,7 @@ export const Modal: FC<ModalProps> = ({ children, openModal, closeModal, ...prop
 
         <Box
           className={
-            'bg-white dark:bg-gray-900 p-6 rounded-md flex flex-col gap-4 left-[50%] top-[50%] absolute translate-y-[-50%] translate-x-[-50%] max-h-[96vh] max-w-[90%] laptop:max-w-[98%] overflow-auto'
+            'bg-white max-h-[95%] dark:bg-gray-800 p-6 rounded-md flex flex-col gap-4 left-[50%] top-[50%] absolute translate-y-[-50%] translate-x-[-50%] max-w-[94%] laptop:max-w-[98%] overflow-auto'
           }
           sx={{
             width: getWidth(props.size)
@@ -77,7 +80,7 @@ export const Modal: FC<ModalProps> = ({ children, openModal, closeModal, ...prop
             <Heading
               endElement={
                 <IconButton onClick={closeModal}>
-                  <CloseIcon color={'error'} />
+                  <Close className={'text-red dark:text-white'} />
                 </IconButton>
               }
               title={props.title}

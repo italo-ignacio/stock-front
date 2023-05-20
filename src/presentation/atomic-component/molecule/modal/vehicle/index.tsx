@@ -1,27 +1,32 @@
 import { Add } from '@mui/icons-material';
 import { IconButton, Tooltip } from '@mui/material';
 import { Modal } from 'presentation/atomic-component/atom';
-import { VehicleFleetForm } from 'presentation/atomic-component/molecule/form';
+import { VehicleForm } from 'presentation/atomic-component/molecule/form';
 import { useModal } from 'data/hooks';
 import type { FC } from 'react';
 
-export const VehicleModal: FC = () => {
+interface VehicleModalProps {
+  fleetId: string;
+}
+export const VehicleModal: FC<VehicleModalProps> = ({ fleetId }) => {
   const { closeModal, isOpen, openModal } = useModal();
 
   return (
     <Modal
       closeModal={closeModal}
+      disableBackdrop
       isOpen={isOpen}
       openModal={openModal}
       openModalElement={
-        <Tooltip title={'Nova frota'}>
+        <Tooltip title={'Novo veículo'}>
           <IconButton onClick={(): void => openModal()}>
             <Add color={'primary'} />
           </IconButton>
         </Tooltip>
       }
+      title={'Novo veículo'}
     >
-      <VehicleFleetForm closeModal={closeModal} />
+      <VehicleForm closeModal={closeModal} fleetId={fleetId} />
     </Modal>
   );
 };

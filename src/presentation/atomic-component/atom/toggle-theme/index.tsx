@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { DarkMode, LightMode } from '@mui/icons-material';
 import { ListItemButton } from '@mui/material';
 import { colors } from 'presentation/style';

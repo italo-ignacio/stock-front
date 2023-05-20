@@ -1,4 +1,3 @@
-import { colors } from 'presentation/style';
 import Divider from '@mui/material/Divider';
 import type { FC, ReactNode } from 'react';
 
@@ -13,13 +12,22 @@ export const Heading: FC<HeadingProps> = ({ title, startElement, endElement }) =
     {startElement || null}
 
     {typeof title === 'string' ? (
-      <h2 className={'uppercase z-10 font-semibold text-lg min-w-max'}>{title}</h2>
+      <h2
+        className={'uppercase z-10 font-semibold text-lg text-gray-700 min-w-max dark:text-white'}
+      >
+        {title}
+      </h2>
     ) : (
-      <div className={'z-10 min-w-max'}>{title}</div>
+      <div>{title}</div>
     )}
 
     <span className={'w-full'}>
-      <Divider color={colors.primary} />
+      <Divider
+        className={'bg-primary dark:bg-gray-350 border-0 border-red p-[1px] rounded-md'}
+        sx={{
+          border: '0'
+        }}
+      />
     </span>
 
     {endElement || null}

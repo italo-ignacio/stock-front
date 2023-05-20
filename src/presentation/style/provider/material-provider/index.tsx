@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 // eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable max-lines */
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -16,9 +15,9 @@ declare module '@mui/material/Button' {
 declare module '@mui/material/TextField' {
   interface TextFieldPropsColorOverrides {
     isSelect: true;
-    dark: true;
   }
 }
+
 declare module '@mui/material/Checkbox' {
   interface CheckboxPropsSizeOverrides {
     small: true;
@@ -55,7 +54,33 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
               transition: 'background-color 10000s ease-in-out 0s'
             }
           }
-        }
+        },
+        variants: [
+          {
+            props: { color: 'isSelect' },
+            style: {
+              '.MuiButtonBase-root': {
+                background: colors.primary,
+                svg: {
+                  color: colors.secondary
+                }
+              },
+              '.MuiInputBase-root': {
+                background: 'transparent !important',
+                borderBottom: '0px !important',
+                paddingRight: '8px !important',
+                paddingTop: '12px'
+              },
+              '.MuiInputBase-root:before': {
+                borderBottom: '0px !important'
+              },
+              input: {
+                display: 'none'
+              },
+              paddingLeft: '0 !important'
+            }
+          }
+        ]
       }
     },
     palette: {
@@ -75,6 +100,14 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
 
   const DarkTheme = createTheme({
     components: {
+      MuiAutocomplete: {
+        styleOverrides: {
+          noOptions: {
+            backgroundColor: colors.gray[700],
+            color: 'white !important'
+          }
+        }
+      },
       MuiButton: {
         defaultProps: {
           variant: 'contained'
@@ -91,7 +124,8 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             },
             [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
               borderColor: 'var(--TextField-brandBorderFocusedColor)'
-            }
+            },
+            color: 'white'
           }
         }
       },
@@ -114,10 +148,52 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             '--TextField-brandBorderColor': '#E0E3E7',
             '--TextField-brandBorderFocusedColor': '#eeeeee',
             '--TextField-brandBorderHoverColor': '#B2BAC2',
+            '.MuiAutocomplete-endAdornment': {
+              '.MuiButtonBase-root': {
+                color: 'white !important'
+              }
+            },
             backgroundColor: colors.gray[700],
-            borderRadius: '6px'
+            borderRadius: '6px',
+            color: 'red'
           }
-        }
+        },
+        variants: [
+          {
+            props: { color: 'isSelect' },
+            style: {
+              '& label': {
+                color: 'white !important',
+                zIndex: '100'
+              },
+              '& label.Mui-focused': {
+                color: 'white !important',
+                zIndex: '100'
+              },
+              '.MuiButtonBase-root': {
+                background: colors.gray[700],
+                svg: {
+                  color: colors.gray[700]
+                }
+              },
+              '.MuiInputBase-root': {
+                background: 'transparent !important',
+                borderBottom: '0px !important',
+                paddingRight: '8px !important',
+                paddingTop: '12px'
+              },
+              '.MuiInputBase-root:before': {
+                borderBottom: '0px !important'
+              },
+              background: 'transparent !important',
+              color: 'white !important',
+              input: {
+                display: 'none'
+              },
+              paddingLeft: '0 !important'
+            }
+          }
+        ]
       }
     },
     palette: {

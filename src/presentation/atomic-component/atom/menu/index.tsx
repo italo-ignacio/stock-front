@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { Menu as MenuUI } from '@mui/material';
 import { useEffect, useState } from 'react';
 import type { Dispatch, FC, MouseEvent, ReactNode, SetStateAction } from 'react';
