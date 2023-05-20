@@ -16,7 +16,7 @@ export const MobileSidebar: FC = () => {
     <Slide direction={'right'} in={sidebar}>
       <div
         className={
-          'absolute z-40 bg-gray-50 dark:border-0 py-5 px-2 dark:bg-gray-800 flex flex-col justify-between w-full h-[calc(100%-76.3px)] overflow-hidden border-r-2 border-gray-100'
+          'fixed z-40 bg-gray-50 dark:border-0 py-5 px-2 dark:bg-gray-800 flex flex-col justify-between w-full h-[calc(100%-76.3px)] overflow-hidden border-r-2 border-gray-100'
         }
       >
         <div

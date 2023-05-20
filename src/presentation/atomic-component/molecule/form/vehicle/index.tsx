@@ -64,7 +64,7 @@ export const VehicleForm: FC<VehicleFormProps> = ({ closeModal, fleetId }) => {
         register={register('type')}
       />
 
-      <div className={'grid grid-cols-[73%_25%] gap-2'}>
+      <div className={'grid grid-cols-[67%_30%] gap-2'}>
         <Select
           change={(value): void => {
             setValueInput(value as SelectValues[]);

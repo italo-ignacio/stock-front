@@ -2,11 +2,14 @@ import { FormButton, LabelInput, ValidatePassword } from 'presentation/atomic-co
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useRegister } from 'data/use-case';
 import { useState } from 'react';
-import type { FC } from 'react';
+import type { Dispatch, FC, SetStateAction } from 'react';
 
-export const RegisterForm: FC = () => {
+interface RegisterFormProps {
+  setIsLogin: Dispatch<SetStateAction<boolean>>;
+}
+export const RegisterForm: FC<RegisterFormProps> = ({ setIsLogin }) => {
   const { handleSubmit, onSubmit, register, errors, setValue, getValues, isSubmitting } =
-    useRegister();
+    useRegister({ setIsLogin });
   const [showPassword, setShowPassword] = useState(false);
   const [showValidatePassword, setShowValidatePassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);

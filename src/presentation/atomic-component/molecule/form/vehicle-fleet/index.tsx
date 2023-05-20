@@ -1,9 +1,7 @@
 import { FormButton, LabelInput } from 'presentation/atomic-component/atom';
 import { IconButton, Switch, Tooltip } from '@mui/material';
 import { Info } from '@mui/icons-material';
-import { dimensions } from 'main/config';
 import { useVehicleFleet } from 'data/use-case';
-import { useWindowDimensions } from 'data/hooks';
 import type { FC } from 'react';
 
 interface VehicleFleetFormProps {
@@ -12,7 +10,6 @@ interface VehicleFleetFormProps {
 export const VehicleFleetForm: FC<VehicleFleetFormProps> = ({ closeModal }) => {
   const { handleSubmit, onSubmit, register, errors, setValue, getValues, isSubmitting } =
     useVehicleFleet({ closeModal });
-  const { width } = useWindowDimensions();
 
   return (
     <form
@@ -31,23 +28,10 @@ export const VehicleFleetForm: FC<VehicleFleetFormProps> = ({ closeModal }) => {
         register={register('name')}
       />
 
-      <div className={'flex items-center gap-2'}>
-        <div>
-          <LabelInput isRow={width >= dimensions.laptop} label={'Aprovar custos automaticamente:'}>
-            <div className={'flex items-center justify-center'}>
-              <Switch
-                onChange={(event): void =>
-                  setValue('autoApproveCost', event.target.checked, {
-                    shouldValidate: true
-                  })
-                }
-                value={getValues('autoApproveCost')}
-              />
-            </div>
-          </LabelInput>
-        </div>
+      <div className={'flex flex-col justify-center items-center'}>
+        <div className={'flex gap-2 justify-center items-center dark:text-white'}>
+          <div>Aprovar custos automaticamente:</div>
 
-        <div className={'-mt-10 laptop:mt-0'}>
           <Tooltip
             enterTouchDelay={0}
             leaveTouchDelay={50000}
@@ -58,6 +42,15 @@ export const VehicleFleetForm: FC<VehicleFleetFormProps> = ({ closeModal }) => {
             </IconButton>
           </Tooltip>
         </div>
+
+        <Switch
+          onChange={(event): void =>
+            setValue('autoApproveCost', event.target.checked, {
+              shouldValidate: true
+            })
+          }
+          value={getValues('autoApproveCost')}
+        />
       </div>
 
       <FormButton isSubmitting={isSubmitting} label={'Cadastrar'} />

@@ -5,6 +5,7 @@ import { resolverError } from 'main/utils';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import type { Dispatch, SetStateAction } from 'react';
 import type {
   FieldErrors,
   SubmitHandler,
@@ -15,7 +16,12 @@ import type {
 } from 'react-hook-form';
 import type { RegisterRequest } from 'validation/schema';
 
-export const useRegister = (): {
+interface useRegisterProps {
+  setIsLogin: Dispatch<SetStateAction<boolean>>;
+}
+export const useRegister = ({
+  setIsLogin
+}: useRegisterProps): {
   errors: FieldErrors<RegisterRequest>;
   register: UseFormRegister<RegisterRequest>;
   onSubmit: SubmitHandler<RegisterRequest>;
@@ -42,6 +48,7 @@ export const useRegister = (): {
       });
 
       toast.success('Cadastrado com sucesso');
+      setIsLogin(true);
     } catch (err) {
       resolverError(err);
     }

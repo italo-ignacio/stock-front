@@ -4,7 +4,7 @@ import type { FC } from 'react';
 
 const selectImageStyle = `
   flex flex-col w-[80%] p-4 px-6 text-center 
-  gap-3 items-center justify-center text-[32px] 
+  gap-3 items-center justify-center text-[26px] 
   mx-auto rounded-md shadow-[0px_0px_5px_5px] 
   shadow-[#00000025] cursor-pointer
   dark:bg-gray-700 dark:border dark:border-gray-350
@@ -19,8 +19,7 @@ export const SelectImageMessage: FC = () => (
       <PhotoCameraOutlined
         sx={{
           color: colors.gray[350],
-          fontSize: '100px',
-          fontWeight: '500'
+          fontSize: '70px'
         }}
       />
     </span>

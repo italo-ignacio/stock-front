@@ -10,7 +10,7 @@ export const MobileHeader: FC = () => {
   return (
     <div
       className={
-        'flex sticky gap-5 justify-around items-center p-4 w-full border-b-2 border-gray-100 h-[80px] dark:border-b-gray-700 dark:bg-gray-800 '
+        'flex sticky z-50 top-0 bg-white gap-5 justify-around items-center p-4 w-full border-b-2 border-gray-100 h-[80px] dark:border-b-gray-700 dark:bg-gray-800 '
       }
     >
       <ListItemButton

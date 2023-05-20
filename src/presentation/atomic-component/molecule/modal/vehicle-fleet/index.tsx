@@ -1,5 +1,5 @@
 import { Add } from '@mui/icons-material';
-import { IconButton, Tooltip } from '@mui/material';
+import { IconButton } from '@mui/material';
 import { Modal } from 'presentation/atomic-component/atom';
 import { VehicleFleetForm } from 'presentation/atomic-component/molecule/form';
 import { useModal } from 'data/hooks';
@@ -11,15 +11,12 @@ export const VehicleFleetModal: FC = () => {
   return (
     <Modal
       closeModal={closeModal}
-      disableBackdrop
       isOpen={isOpen}
       openModal={openModal}
       openModalElement={
-        <Tooltip title={'Nova frota'}>
-          <IconButton onClick={(): void => openModal()}>
-            <Add color={'primary'} />
-          </IconButton>
-        </Tooltip>
+        <IconButton onClick={(): void => openModal()}>
+          <Add color={'primary'} />
+        </IconButton>
       }
     >
       <VehicleFleetForm closeModal={closeModal} />

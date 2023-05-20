@@ -21,7 +21,7 @@ export const LaptopSidebar: FC = () => {
             navigate(paths.dashboard);
           }}
         >
-          <span className={'text-primary'}>Dashboard</span>
+          <span className={'text-primary dark:text-white'}>Dashboard</span>
         </ListItemButton>
 
         <ListItemButton
@@ -29,7 +29,7 @@ export const LaptopSidebar: FC = () => {
             navigate(paths.myFleets);
           }}
         >
-          <span className={'text-primary'}>Minhas Frotas</span>
+          <span className={'text-primary dark:text-white'}>Minhas Frotas</span>
         </ListItemButton>
       </div>
 
@@ -40,7 +40,7 @@ export const LaptopSidebar: FC = () => {
             navigate(paths.login);
           }}
         >
-          <span className={'text-primary'}>Sair</span>
+          <span className={'text-primary dark:text-white'}>Sair</span>
         </ListItemButton>
       </div>
     </div>

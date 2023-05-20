@@ -10,7 +10,7 @@ export const LaptopHeader: FC = () => {
   return (
     <div
       className={
-        'flex gap-5 justify-around items-center p-4 w-full border-b-2 border-gray-100 dark:bg-gray-800 dark:border-0'
+        'flex sticky top-0 gap-5 justify-around items-center p-4 w-full border-b-2 border-gray-100 dark:bg-gray-800 dark:border-0'
       }
     >
       <ListItemButton
