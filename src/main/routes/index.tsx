@@ -2,6 +2,7 @@ import {
   AuthContent,
   DashboardContent,
   FleetContent,
+  MyDriversContent,
   MyFleetsContent
 } from 'presentation/environment';
 import { AuthTemplate, MainTemplate } from 'presentation/atomic-component/template';
@@ -27,6 +28,7 @@ const RouterConfig: FC = () => (
           <Route element={<MainTemplate />}>
             <Route element={<DashboardContent />} path={routePaths.dashboard} />
             <Route element={<MyFleetsContent />} path={routePaths.myFleets} />
+            <Route element={<MyDriversContent />} path={routePaths.myDrivers} />
             <Route element={<FleetContent />} path={routePaths.fleet} />
           </Route>
         </Route>

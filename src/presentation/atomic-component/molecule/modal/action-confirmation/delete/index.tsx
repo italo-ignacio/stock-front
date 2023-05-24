@@ -6,13 +6,14 @@ import { useModal } from 'data/hooks';
 import type { FC, ReactNode } from 'react';
 
 interface DeleteConfirmationModalProps {
-  text: string;
+  text: ReactNode | string;
   highlightedText?: string;
   id: number | string;
   route: unknown;
   queryName: string;
   successMessage: string;
   openElement?: ReactNode;
+  isPatch?: boolean;
 }
 
 export const DeleteConfirmationModal: FC<DeleteConfirmationModalProps> = ({
@@ -22,13 +23,15 @@ export const DeleteConfirmationModal: FC<DeleteConfirmationModalProps> = ({
   route,
   queryName,
   successMessage,
-  openElement
+  openElement,
+  isPatch
 }) => {
   const { closeModal, openModal, isOpen } = useModal();
 
   const { handleDelete } = useDelete({
     closeModal,
     id,
+    isPatch,
     queryName,
     route,
     successMessage

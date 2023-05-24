@@ -1,4 +1,5 @@
 import { ListItemButton, Slide } from '@mui/material';
+import { SidebarItems } from 'main/mock';
 import { logout } from 'store/auth/slice';
 import { paths } from 'main/config';
 import { setSidebar } from 'store/sidebar/slice';
@@ -26,23 +27,17 @@ export const MobileSidebar: FC = () => {
         />
 
         <div className={'flex flex-col gap-4'}>
-          <ListItemButton
-            onClick={(): void => {
-              navigate(paths.dashboard);
-              dispatch(setSidebar(false));
-            }}
-          >
-            <span className={'text-primary dark:text-white'}>Dashboard</span>
-          </ListItemButton>
-
-          <ListItemButton
-            onClick={(): void => {
-              navigate(paths.myFleets);
-              dispatch(setSidebar(false));
-            }}
-          >
-            <span className={'text-primary dark:text-white'}>Minhas Frotas</span>
-          </ListItemButton>
+          {SidebarItems.map((sidebarItem) => (
+            <ListItemButton
+              key={sidebarItem.link}
+              onClick={(): void => {
+                navigate(sidebarItem.link);
+                dispatch(setSidebar(false));
+              }}
+            >
+              <span className={'text-primary dark:text-white'}>{sidebarItem.name}</span>
+            </ListItemButton>
+          ))}
         </div>
 
         <div>

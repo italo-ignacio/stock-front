@@ -1,4 +1,7 @@
+import { QueryName, apiPaths } from 'main/config';
+import { api } from 'infra/http';
 import { driverSchema } from 'validation/schema';
+import { queryClient } from 'infra/lib';
 import { resolverError } from 'main/utils';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
@@ -39,9 +42,13 @@ export const useDriver = ({
 
   const onSubmit: SubmitHandler<DriverRequest> = async (data) => {
     try {
-      await console.log(data);
+      await api.post({
+        body: data,
+        route: apiPaths.driver.all
+      });
 
-      toast.success('Cadastrado com sucesso');
+      toast.success('Motorista cadastrado com sucesso');
+      queryClient.invalidateQueries(QueryName.driver);
       closeModal();
     } catch (err) {
       resolverError(err);

@@ -162,7 +162,7 @@ export const SwipeableImages: FC<SwipeableImagesProps> = ({ img, setImg, formImg
           <div>
             <Button
               onClick={(): void => document.getElementById('select-image')?.click()}
-              startIcon={<Add fontSize={'large'} />}
+              startIcon={<Add className={'text-primary dark:text-white'} fontSize={'large'} />}
               sx={{
                 border: `1px solid ${colors.primary}`
               }}

@@ -42,8 +42,6 @@ export const useVehicle = ({
   });
 
   const onSubmit: SubmitHandler<VehicleRequest> = async (data) => {
-    return console.log(data);
-
     try {
       await api.post({
         body: data,

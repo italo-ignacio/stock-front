@@ -44,7 +44,7 @@ export const useRegister = ({
     try {
       await api.request({
         body: data,
-        route: apiPaths.account.register
+        route: apiPaths.account.all
       });
 
       toast.success('Cadastrado com sucesso');

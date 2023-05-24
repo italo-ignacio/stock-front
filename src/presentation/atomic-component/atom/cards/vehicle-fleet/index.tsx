@@ -31,7 +31,7 @@ export const VehicleFleetCard: FC<VehicleFleetCardProps> = ({ name, id }) => {
           queryName={QueryName.vehicleFleet}
           route={apiPaths.vehicleFleet}
           successMessage={'Frota deletado com sucesso'}
-          text={'Tem certeza que deseja excluir a frota'}
+          text={'Tem certeza que deseja excluir a frota ?'}
         />
       </div>
     </div>

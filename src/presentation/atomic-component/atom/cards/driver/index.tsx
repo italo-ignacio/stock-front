@@ -3,23 +3,27 @@ import { ListItemButton } from '@mui/material';
 import { QueryName, apiPaths } from 'main/config';
 import type { FC } from 'react';
 
-interface VehicleCardProps {
+interface DriverCardProps {
   id: string;
   name: string;
 }
 
-export const VehicleCard: FC<VehicleCardProps> = ({ name, id }) => (
+export const DriverCard: FC<DriverCardProps> = ({ name, id }) => (
   <div className={'flex w-full rounded-md border-2 border-primary dark:bg-gray-800 dark:border-0'}>
     <ListItemButton>{name}</ListItemButton>
 
     <div className={'p-1'}>
       <DeleteConfirmationModal
-        highlightedText={name}
         id={id}
-        queryName={QueryName.vehicle}
-        route={apiPaths.vehicle}
-        successMessage={'Veículo deletado com sucesso'}
-        text={'Tem certeza que deseja excluir o veículo ?'}
+        isPatch
+        queryName={QueryName.driver}
+        route={apiPaths.driver.disable}
+        successMessage={'Motorista desativado com sucesso'}
+        text={
+          <p>
+            Deseja desativar o/a motorista <strong>{name}</strong> do sistema ?
+          </p>
+        }
       />
     </div>
   </div>

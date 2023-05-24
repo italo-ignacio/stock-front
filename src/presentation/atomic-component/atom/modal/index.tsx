@@ -1,7 +1,6 @@
 import { Box, Button, IconButton, Modal as ModalUI } from '@mui/material';
-import { Heading } from 'presentation/atomic-component/atom/heading';
-
 import { Close } from '@mui/icons-material';
+import { Heading } from 'presentation/atomic-component/atom/heading';
 import type { FC, ReactNode } from 'react';
 import type { OverridableComponent } from '@mui/types';
 import type { SvgIconTypeMap } from '@mui/material';
@@ -63,7 +62,7 @@ export const Modal: FC<ModalProps> = ({ children, openModal, closeModal, ...prop
     )}
 
     <ModalUI hideBackdrop={props.disableBackdrop} onClose={closeModal} open={props.isOpen}>
-      <>
+      <div>
         {props.disableBackdrop ? (
           <div className={'absolute overflow-hidden top-0 left-0 w-full h-screen bg-[#0000007f]'} />
         ) : null}
@@ -89,7 +88,7 @@ export const Modal: FC<ModalProps> = ({ children, openModal, closeModal, ...prop
 
           {children}
         </Box>
-      </>
+      </div>
     </ModalUI>
   </>
 );

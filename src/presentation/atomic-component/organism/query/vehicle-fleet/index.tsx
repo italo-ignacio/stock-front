@@ -1,21 +1,21 @@
-import { VehicleFleetCard } from 'presentation/atomic-component/atom';
+import { QueryManager, VehicleFleetCard } from 'presentation/atomic-component/atom';
 import { useFindVehicleFleetQuery } from 'infra/cache';
 import type { FC } from 'react';
 
 export const VehicleFleetQuery: FC = () => {
-  const query = useFindVehicleFleetQuery({
+  const vehicleFleetQuery = useFindVehicleFleetQuery({
     page: 1
   });
 
   return (
     <div>
-      {query.isSuccess ? (
+      <QueryManager query={vehicleFleetQuery}>
         <div className={'flex flex-wrap gap-2'}>
-          {query.data.payload.map((vehicleFleet) => (
+          {vehicleFleetQuery.data?.payload.map((vehicleFleet) => (
             <VehicleFleetCard key={vehicleFleet.id} id={vehicleFleet.id} name={vehicleFleet.name} />
           ))}
         </div>
-      ) : null}
+      </QueryManager>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { ListItemButton } from '@mui/material';
+import { SidebarItems } from 'main/mock';
 import { logout } from 'store/auth/slice';
 import { paths } from 'main/config';
 import { useDispatch } from 'react-redux';
@@ -16,21 +17,16 @@ export const LaptopSidebar: FC = () => {
       }
     >
       <div className={'flex flex-col gap-3'}>
-        <ListItemButton
-          onClick={(): void => {
-            navigate(paths.dashboard);
-          }}
-        >
-          <span className={'text-primary dark:text-white'}>Dashboard</span>
-        </ListItemButton>
-
-        <ListItemButton
-          onClick={(): void => {
-            navigate(paths.myFleets);
-          }}
-        >
-          <span className={'text-primary dark:text-white'}>Minhas Frotas</span>
-        </ListItemButton>
+        {SidebarItems.map((sidebarItem) => (
+          <ListItemButton
+            key={sidebarItem.link}
+            onClick={(): void => {
+              navigate(sidebarItem.link);
+            }}
+          >
+            <span className={'text-primary dark:text-white'}>{sidebarItem.name}</span>
+          </ListItemButton>
+        ))}
       </div>
 
       <div>

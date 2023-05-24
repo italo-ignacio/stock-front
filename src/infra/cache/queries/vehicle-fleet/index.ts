@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import type { UseQueryResult } from 'react-query';
 import type { VehicleFleetResponse } from 'domain/models/vehicle-fleet';
 
-interface useGetVehicleFleetQueryProps {
+interface useFindVehicleFleetQueryProps {
   page: number;
   search?: string;
 }
@@ -12,7 +12,7 @@ interface useGetVehicleFleetQueryProps {
 export const useFindVehicleFleetQuery = ({
   page,
   search
-}: useGetVehicleFleetQueryProps): UseQueryResult<{ payload: VehicleFleetResponse[] }> =>
+}: useFindVehicleFleetQueryProps): UseQueryResult<{ payload: VehicleFleetResponse[] }> =>
   useQuery([QueryName.vehicleFleet, page, search], () =>
     api.get({
       queryParams: { limit: 10, page, search },

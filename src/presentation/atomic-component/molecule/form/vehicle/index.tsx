@@ -2,8 +2,9 @@ import { DriverModal } from 'presentation/atomic-component/molecule/modal/driver
 import { FormButton, LabelInput, Select, SelectImage } from 'presentation/atomic-component/atom';
 import { IconButton, Switch, Tooltip } from '@mui/material';
 import { Info } from '@mui/icons-material';
-import { convertList } from 'main/utils';
+import { convertList, convertToSelect } from 'main/utils';
 import { useEffect, useState } from 'react';
+import { useFindDriverQuery } from 'infra/cache';
 import { useVehicle } from 'data/use-case';
 import type { FC } from 'react';
 import type { SelectValues } from 'presentation/atomic-component/atom';
@@ -18,6 +19,17 @@ export const VehicleForm: FC<VehicleFormProps> = ({ closeModal, fleetId }) => {
     useVehicle({ closeModal });
 
   const [valueInput, setValueInput] = useState<SelectValues[]>([]);
+
+  const [list, setList] = useState<SelectValues[]>([]);
+
+  const driverQuery = useFindDriverQuery({
+    page: 1
+  });
+
+  useEffect(() => {
+    if (driverQuery.isSuccess && driverQuery.data.payload)
+      setList(convertToSelect(driverQuery.data.payload));
+  }, [driverQuery.data, driverQuery.isSuccess]);
 
   useEffect(() => {
     setValue('vehicleFleetId', fleetId, {
@@ -71,7 +83,7 @@ export const VehicleForm: FC<VehicleFormProps> = ({ closeModal, fleetId }) => {
           }}
           isMultiple
           label={'Motoristas'}
-          options={[]}
+          options={list}
           valueInput={valueInput}
         />
 

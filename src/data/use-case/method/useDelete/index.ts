@@ -9,6 +9,7 @@ interface useDeleteProps {
   closeModal: () => void;
   queryName: string;
   successMessage: string;
+  isPatch?: boolean;
 }
 
 export const useDelete = ({
@@ -16,11 +17,14 @@ export const useDelete = ({
   route,
   closeModal,
   queryName,
-  successMessage
+  successMessage,
+  isPatch
 }: useDeleteProps): { handleDelete: () => Promise<void> } => {
   const handleDelete = async (): Promise<void> => {
     try {
-      await api.delete({ id, route });
+      if (isPatch) await api.patch({ id, route });
+      else await api.delete({ id, route });
+
       queryClient.invalidateQueries(queryName);
       toast.success(successMessage);
       closeModal();

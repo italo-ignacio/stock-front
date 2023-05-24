@@ -113,6 +113,7 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
           variant: 'contained'
         }
       },
+
       MuiOutlinedInput: {
         styleOverrides: {
           notchedOutline: {

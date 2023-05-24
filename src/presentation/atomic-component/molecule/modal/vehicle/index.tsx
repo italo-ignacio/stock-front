@@ -19,7 +19,7 @@ export const VehicleModal: FC<VehicleModalProps> = ({ fleetId }) => {
       openModal={openModal}
       openModalElement={
         <IconButton onClick={(): void => openModal()}>
-          <Add color={'primary'} />
+          <Add className={'text-primary dark:text-white'} />
         </IconButton>
       }
       title={'Novo veículo'}
