@@ -1,6 +1,6 @@
 /* eslint-disable no-unreachable */
+import { QueryName, apiPaths } from 'main/config';
 import { api } from 'infra/http';
-import { apiPaths } from 'main/config';
 import { queryClient } from 'infra/lib';
 import { resolverError } from 'main/utils';
 import { toast } from 'react-toastify';
@@ -41,13 +41,26 @@ export const useVehicle = ({
     resolver: yupResolver(vehicleSchema)
   });
 
-  const onSubmit: SubmitHandler<VehicleRequest> = async (data) => {
+  const onSubmit: SubmitHandler<VehicleRequest> = async ({ image, ...data }) => {
     try {
-      await api.post({
+      if (image) {
+        const formData = new FormData();
+
+        formData.append('image', image);
+
+        await api.put({
+          body: formData,
+          isFormData: true,
+          route: apiPaths.vehicle.image
+        });
+      }
+
+      await api.post<{ payload: { id: string } }>({
         body: data,
-        route: apiPaths.vehicle
+        route: apiPaths.vehicle.all
       });
-      queryClient.invalidateQueries('vehicle');
+
+      queryClient.invalidateQueries(QueryName.vehicle);
       closeModal();
       toast.success('Cadastrado com sucesso');
     } catch (err) {

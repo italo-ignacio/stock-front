@@ -1,5 +1,5 @@
 import { Add } from '@mui/icons-material';
-import { DriverModal } from 'presentation/atomic-component/molecule/modal/driver';
+import { DriverModal } from 'presentation/atomic-component/molecule/modal';
 import { DriverQuery } from 'presentation/atomic-component/organism';
 import { IconButton } from '@mui/material';
 import type { FC } from 'react';

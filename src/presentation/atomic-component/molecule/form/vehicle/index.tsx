@@ -48,7 +48,13 @@ export const VehicleForm: FC<VehicleFormProps> = ({ closeModal, fleetId }) => {
       className={'flex flex-col gap-4 w-[100%] ml-auto mr-auto'}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <SelectImage />
+      <SelectImage
+        onChange={(file): void => {
+          setValue('image', file, {
+            shouldValidate: true
+          });
+        }}
+      />
 
       <LabelInput
         color={'secondary'}

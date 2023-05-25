@@ -2,14 +2,16 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { Button } from '@mui/material';
 import { SelectImageMessage } from 'main/utils';
+import { toast } from 'react-toastify';
 import { useState } from 'react';
 import type { FC } from 'react';
 
 interface SelectImageProps {
   multiple?: boolean;
+  onChange: (item: File) => void;
 }
 
-export const SelectImage: FC<SelectImageProps> = ({ multiple }) => {
+export const SelectImage: FC<SelectImageProps> = ({ multiple, onChange }) => {
   const [img, setImg] = useState('');
 
   return (
@@ -40,7 +42,14 @@ export const SelectImage: FC<SelectImageProps> = ({ multiple }) => {
         id={'select-image'}
         multiple={multiple}
         onChange={(event): void => {
-          if (event.target.files) setImg(URL.createObjectURL(event.target.files[0]));
+          if (event.target.files)
+            if (event.target.files[0].size > 5000000)
+              toast.error('O arquivo deve ter menos de 5MB');
+            else {
+              onChange(event.target.files[0]);
+              setImg(URL.createObjectURL(event.target.files[0]));
+            }
+
           Object.assign(event.target, { value: '' });
         }}
         type={'file'}

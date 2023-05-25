@@ -25,6 +25,9 @@ export const apiPaths = {
     disable: '/driver/disable'
   },
   refreshToken: '/auth/refresh-token',
-  vehicle: '/vehicle',
+  vehicle: {
+    all: '/vehicle',
+    image: '/vehicle/image'
+  },
   vehicleFleet: '/vehicle-fleet'
 };

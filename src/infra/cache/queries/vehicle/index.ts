@@ -16,6 +16,6 @@ export const useFindVehicleQuery = ({
   useQuery([QueryName.vehicle, page, search], () =>
     api.get({
       queryParams: { limit: 10, page, search },
-      route: apiPaths.vehicle
+      route: apiPaths.vehicle.all
     })
   );
