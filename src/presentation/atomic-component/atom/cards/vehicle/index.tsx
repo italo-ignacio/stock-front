@@ -1,16 +1,13 @@
+import { Avatar, ListItemButton } from '@mui/material';
 import { DeleteConfirmationModal } from 'presentation/atomic-component/molecule/modal/action-confirmation';
-import { ListItemButton } from '@mui/material';
 import { QueryName, apiPaths } from 'main/config';
 import type { FC } from 'react';
+import type { Vehicle } from 'domain/models';
 
-interface VehicleCardProps {
-  id: string;
-  name: string;
-}
-
-export const VehicleCard: FC<VehicleCardProps> = ({ name, id }) => (
+export const VehicleCard: FC<Vehicle> = ({ name, id, image }) => (
   <div className={'flex w-full rounded-md border-2 border-primary dark:bg-gray-800 dark:border-0'}>
     <ListItemButton>{name}</ListItemButton>
+    {image ? <Avatar alt={name} src={image} /> : null}
 
     <div className={'p-1'}>
       <DeleteConfirmationModal

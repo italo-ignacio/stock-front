@@ -1,3 +1,4 @@
+import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import eslintPlugin from 'vite-plugin-eslint';
@@ -9,7 +10,23 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
     outDir: './build'
   },
-  plugins: [react(), eslintPlugin()],
+  plugins: [
+    react(),
+    eslintPlugin(),
+    VitePWA({
+      manifest: {
+        icons: [
+          {
+            sizes: '256x256',
+            src: '/icon-256x256.png',
+            type: 'image/png'
+          }
+        ],
+        name: 'Controle de frotas',
+        theme_color: '#000'
+      }
+    })
+  ],
   resolve: {
     alias: [
       {

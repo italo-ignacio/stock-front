@@ -24,10 +24,10 @@ export const apiPaths = {
     auth: '/auth/driver',
     disable: '/driver/disable'
   },
+  image: '/image',
   refreshToken: '/auth/refresh-token',
   vehicle: {
-    all: '/vehicle',
-    image: '/vehicle/image'
+    all: '/vehicle'
   },
   vehicleFleet: '/vehicle-fleet'
 };

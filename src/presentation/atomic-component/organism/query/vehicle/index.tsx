@@ -12,7 +12,7 @@ export const VehicleQuery: FC = () => {
       <QueryManager query={vehicleQuery}>
         <div className={'flex flex-wrap gap-2'}>
           {vehicleQuery.data?.payload.map((vehicle) => (
-            <VehicleCard key={vehicle.id} id={vehicle.id} name={vehicle.name} />
+            <VehicleCard key={vehicle.id} {...vehicle} />
           ))}
         </div>
       </QueryManager>

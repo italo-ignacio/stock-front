@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/init-declarations */
 /* eslint-disable no-unreachable */
 import { QueryName, apiPaths } from 'main/config';
 import { api } from 'infra/http';
@@ -43,17 +44,24 @@ export const useVehicle = ({
 
   const onSubmit: SubmitHandler<VehicleRequest> = async ({ image, ...data }) => {
     try {
+      let nameImage: string | undefined;
+
       if (image) {
         const formData = new FormData();
 
         formData.append('image', image);
 
-        await api.put({
+        const {
+          payload: { filename }
+        } = await api.post<{ payload: { filename: string } }>({
           body: formData,
           isFormData: true,
-          route: apiPaths.vehicle.image
+          route: apiPaths.image
         });
+
+        nameImage = filename;
       }
+      if (nameImage) Object.assign(data, { ...data, image: nameImage });
 
       await api.post<{ payload: { id: string } }>({
         body: data,

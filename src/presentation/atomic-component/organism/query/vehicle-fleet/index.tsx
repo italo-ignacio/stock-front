@@ -8,14 +8,12 @@ export const VehicleFleetQuery: FC = () => {
   });
 
   return (
-    <div>
-      <QueryManager query={vehicleFleetQuery}>
-        <div className={'flex flex-wrap gap-2'}>
-          {vehicleFleetQuery.data?.payload.map((vehicleFleet) => (
-            <VehicleFleetCard key={vehicleFleet.id} id={vehicleFleet.id} name={vehicleFleet.name} />
-          ))}
-        </div>
-      </QueryManager>
-    </div>
+    <QueryManager query={vehicleFleetQuery}>
+      <div className={'flex flex-wrap gap-2'}>
+        {vehicleFleetQuery.data?.payload.map((vehicleFleet) => (
+          <VehicleFleetCard key={vehicleFleet.id} id={vehicleFleet.id} name={vehicleFleet.name} />
+        ))}
+      </div>
+    </QueryManager>
   );
 };

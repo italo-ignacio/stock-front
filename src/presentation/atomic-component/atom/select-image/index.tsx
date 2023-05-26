@@ -8,7 +8,7 @@ import type { FC } from 'react';
 
 interface SelectImageProps {
   multiple?: boolean;
-  onChange: (item: File) => void;
+  onChange: (item: File | null) => void;
 }
 
 export const SelectImage: FC<SelectImageProps> = ({ multiple, onChange }) => {
@@ -27,7 +27,14 @@ export const SelectImage: FC<SelectImageProps> = ({ multiple, onChange }) => {
               src={img}
             />
 
-            <Button color={'error'} onClick={(): void => setImg('')} variant={'text'}>
+            <Button
+              color={'error'}
+              onClick={(): void => {
+                setImg('');
+                onChange(null);
+              }}
+              variant={'text'}
+            >
               Remover imagem
             </Button>
           </div>
@@ -37,7 +44,7 @@ export const SelectImage: FC<SelectImageProps> = ({ multiple, onChange }) => {
       </div>
 
       <input
-        accept={'image/*'}
+        accept={'.jpeg, .png, .webp, .avif'}
         className={'hidden'}
         id={'select-image'}
         multiple={multiple}
@@ -49,7 +56,7 @@ export const SelectImage: FC<SelectImageProps> = ({ multiple, onChange }) => {
               onChange(event.target.files[0]);
               setImg(URL.createObjectURL(event.target.files[0]));
             }
-
+          else onChange(null);
           Object.assign(event.target, { value: '' });
         }}
         type={'file'}

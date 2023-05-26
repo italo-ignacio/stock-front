@@ -46,7 +46,6 @@ export const LabelInput: FC<LabelInputProps> = ({ register, children, ...props }
         <TextField
           {...register}
           InputProps={{
-            autoComplete: 'on',
             endAdornment: props.EndIcon ? (
               <div className={'flex absolute right-3 justify-end items-end'}>
                 <IconButton
@@ -69,7 +68,6 @@ export const LabelInput: FC<LabelInputProps> = ({ register, children, ...props }
               color: theme === 'dark' ? 'white' : ''
             }
           }}
-          autoComplete={'on'}
           error={props.error}
           label={props.placeholder}
           onBlur={props.onFocusOut}

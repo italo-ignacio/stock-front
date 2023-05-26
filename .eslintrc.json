@@ -837,7 +837,7 @@
     },
     {
       "files": [
-        "**/{atomic-component,atomic-components}/{atoms,atom,molecules,molecule}/**/*.{ts,tsx}"
+        "**/{atomic-component,atomic-components}/{atoms,atom,molecules,molecule,organisms,organism}/**/*.{ts,tsx}"
       ],
       "rules": { "react/jsx-props-no-spreading": "off" }
     },

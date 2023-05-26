@@ -58,13 +58,15 @@ export const useLogin = (): {
           refreshToken: encryptData(payload.refreshToken)
         })
       );
+
       toast.success('Logado com sucesso');
+
       const path = getRedirectPath();
 
       dispatch(setRedirect({ path: null }));
       navigate(path === null || path === '/' ? paths.dashboard : path);
     } catch (err) {
-      resolverError(err, undefined);
+      resolverError(err);
     }
   };
 
