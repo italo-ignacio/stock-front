@@ -13,6 +13,7 @@ export * from './heading';
 export * from './toggle-theme';
 export * from './textarea';
 export * from './query-manager';
+export * from './numeric-input';
 export * from './cards';
 export * from './toggle-menu';
 export * from './select-image';

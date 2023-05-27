@@ -1,7 +1,5 @@
 import { DriverModal } from 'presentation/atomic-component/molecule/modal/driver';
 import { FormButton, LabelInput, Select, SelectImage } from 'presentation/atomic-component/atom';
-import { IconButton, Switch, Tooltip } from '@mui/material';
-import { Info } from '@mui/icons-material';
 import { convertList, convertToSelect } from 'main/utils';
 import { useEffect, useState } from 'react';
 import { useFindDriverQuery } from 'infra/cache';
@@ -15,8 +13,9 @@ interface VehicleFormProps {
 }
 
 export const VehicleForm: FC<VehicleFormProps> = ({ closeModal, fleetId }) => {
-  const { handleSubmit, onSubmit, register, errors, setValue, getValues, isSubmitting } =
-    useVehicle({ closeModal });
+  const { handleSubmit, onSubmit, register, errors, setValue, isSubmitting } = useVehicle({
+    closeModal
+  });
 
   const [valueInput, setValueInput] = useState<SelectValues[]>([]);
 
@@ -94,31 +93,6 @@ export const VehicleForm: FC<VehicleFormProps> = ({ closeModal, fleetId }) => {
         />
 
         <DriverModal />
-      </div>
-
-      <div className={'flex flex-col justify-center items-center'}>
-        <div className={'flex gap-2 justify-center items-center dark:text-white'}>
-          <div>Aprovar custos automaticamente:</div>
-
-          <Tooltip
-            enterTouchDelay={0}
-            leaveTouchDelay={50000}
-            title={'Quando o motorista cadastrar um custo ele será aprovado automaticamente'}
-          >
-            <IconButton>
-              <Info color={'info'} />
-            </IconButton>
-          </Tooltip>
-        </div>
-
-        <Switch
-          onChange={(event): void =>
-            setValue('autoApproveCost', event.target.checked, {
-              shouldValidate: true
-            })
-          }
-          value={getValues('autoApproveCost')}
-        />
       </div>
 
       <FormButton isSubmitting={isSubmitting} label={'Cadastrar'} />

@@ -21,15 +21,15 @@ export const apiPaths = {
     all: '/account',
     auth: '/auth/account'
   },
+  cost: '/cost',
   driver: {
+    active: '/driver/active',
     all: '/driver',
     auth: '/auth/driver',
     disable: '/driver/disable'
   },
   image: '/image',
   refreshToken: '/auth/refresh-token',
-  vehicle: {
-    all: '/vehicle'
-  },
+  vehicle: '/vehicle',
   vehicleFleet: '/vehicle-fleet'
 };

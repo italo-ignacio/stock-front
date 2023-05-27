@@ -8,11 +8,11 @@ import type { SvgIconTypeMap } from '@mui/material';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 
 interface LabelInputProps {
+  id?: string;
   register?: UseFormRegisterReturn;
   value?: string;
   label?: string;
   type?: string;
-  color?: 'primary' | 'secondary';
   mask?: string;
   required?: boolean;
   placeholder?: string;
@@ -69,6 +69,7 @@ export const LabelInput: FC<LabelInputProps> = ({ register, children, ...props }
             }
           }}
           error={props.error}
+          id={props.id}
           label={props.placeholder}
           onBlur={props.onFocusOut}
           onChange={props.onChange ? props.onChange : register?.onChange}

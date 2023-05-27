@@ -1,4 +1,4 @@
-import { date, mixed, number, object, string } from 'yup';
+import { date, mixed, object, string } from 'yup';
 import type { InferType } from 'yup';
 
 export const costSchema = object().shape({
@@ -7,7 +7,7 @@ export const costSchema = object().shape({
   driverId: string(),
   image: mixed(),
   name: string().required(),
-  value: number().required(),
+  value: string().required(),
   vehicleId: string().required()
 });
 

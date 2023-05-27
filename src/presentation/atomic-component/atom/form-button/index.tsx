@@ -9,6 +9,7 @@ interface FormButtonProps {
 export const FormButton: FC<FormButtonProps> = ({ isSubmitting, label }) => (
   <Button
     className={'w-full flex gap-2'}
+    id={'form-button'}
     size={'large'}
     type={isSubmitting ? 'button' : 'submit'}
     variant={'contained'}

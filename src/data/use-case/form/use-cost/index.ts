@@ -2,12 +2,13 @@
 /* eslint-disable no-unreachable */
 import { QueryName, apiPaths } from 'main/config';
 import { api } from 'infra/http';
+import { costSchema } from 'validation/schema';
 import { queryClient } from 'infra/lib';
 import { resolverError } from 'main/utils';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
-import { vehicleSchema } from 'validation/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
+import type { CostRequest } from 'validation/schema';
 import type {
   FieldErrors,
   SubmitHandler,
@@ -16,20 +17,20 @@ import type {
   UseFormRegister,
   UseFormSetValue
 } from 'react-hook-form';
-import type { VehicleRequest } from 'validation/schema';
 
-interface useVehicleProps {
+interface useCostProps {
   closeModal: () => void;
 }
-export const useVehicle = ({
+
+export const useCost = ({
   closeModal
-}: useVehicleProps): {
-  errors: FieldErrors<VehicleRequest>;
-  register: UseFormRegister<VehicleRequest>;
-  onSubmit: SubmitHandler<VehicleRequest>;
-  handleSubmit: UseFormHandleSubmit<VehicleRequest>;
-  getValues: UseFormGetValues<VehicleRequest>;
-  setValue: UseFormSetValue<VehicleRequest>;
+}: useCostProps): {
+  errors: FieldErrors<CostRequest>;
+  register: UseFormRegister<CostRequest>;
+  onSubmit: SubmitHandler<CostRequest>;
+  handleSubmit: UseFormHandleSubmit<CostRequest>;
+  getValues: UseFormGetValues<CostRequest>;
+  setValue: UseFormSetValue<CostRequest>;
   isSubmitting: boolean;
 } => {
   const {
@@ -38,11 +39,13 @@ export const useVehicle = ({
     setValue,
     getValues,
     formState: { errors, isSubmitting }
-  } = useForm<VehicleRequest>({
-    resolver: yupResolver(vehicleSchema)
+  } = useForm<CostRequest>({
+    resolver: yupResolver(costSchema)
   });
 
-  const onSubmit: SubmitHandler<VehicleRequest> = async ({ image, ...data }) => {
+  const onSubmit: SubmitHandler<CostRequest> = async ({ image, ...data }) => {
+    return console.log(data);
+
     try {
       let nameImage: string | undefined;
 
@@ -65,10 +68,10 @@ export const useVehicle = ({
 
       await api.post({
         body: data,
-        route: apiPaths.vehicle
+        route: apiPaths.cost
       });
 
-      queryClient.invalidateQueries(QueryName.vehicle);
+      queryClient.invalidateQueries(QueryName.cost);
       closeModal();
       toast.success('Cadastrado com sucesso');
     } catch (err) {

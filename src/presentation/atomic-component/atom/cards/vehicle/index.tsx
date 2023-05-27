@@ -36,7 +36,7 @@ export const VehicleCard: FC<VehicleCardProps> = ({ name, id, image, fleetId }) 
           highlightedText={`${name}`}
           id={id}
           queryName={QueryName.vehicle}
-          route={apiPaths.vehicle.all}
+          route={apiPaths.vehicle}
           successMessage={'Veículo deletado com sucesso'}
           text={'Tem certeza que deseja excluir o seguinte veículo ?'}
         />

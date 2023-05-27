@@ -1,5 +1,6 @@
 export enum QueryName {
   vehicleFleet = 'vehicleFleet',
   vehicle = 'vehicle',
-  driver = 'driver'
+  driver = 'driver',
+  cost = 'cost'
 }
