@@ -3,7 +3,8 @@ export enum routePaths {
   login = '/',
   myFleets = '/minhas-frotas',
   myDrivers = '/meus-motoristas',
-  fleet = '/minhas-frotas/:fleetId'
+  fleet = '/minhas-frotas/:fleetId',
+  vehicle = '/minhas-frotas/:fleetId/:vehicleId'
 }
 
 export const paths = {
@@ -11,7 +12,8 @@ export const paths = {
   fleet: (fleetId: string): string => `/minhas-frotas/${fleetId}`,
   login: '/',
   myDrivers: '/meus-motoristas',
-  myFleets: '/minhas-frotas'
+  myFleets: '/minhas-frotas',
+  vehicle: (fleetId: string, vehicleId: string): string => `/minhas-frotas/${fleetId}/${vehicleId}`
 };
 
 export const apiPaths = {

@@ -7,6 +7,7 @@ import type { FC } from 'react';
 export const LoginForm: FC<{ isDriver: boolean }> = ({ isDriver }) => {
   const { handleSubmit, onSubmit, register, errors, getValues, setValue, isSubmitting } =
     useLogin();
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = (): void => {

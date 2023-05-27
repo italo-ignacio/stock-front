@@ -20,9 +20,20 @@ export default defineConfig({
             sizes: '256x256',
             src: '/icon-256x256.png',
             type: 'image/png'
+          },
+          {
+            sizes: '512x512',
+            src: '/icon-512x512.png',
+            type: 'image/png'
+          },
+          {
+            sizes: '1024x1024',
+            src: '/icon-1024x1024.png',
+            type: 'image/png'
           }
         ],
         name: 'Controle de frotas',
+        short_name: 'Controle de frotas',
         theme_color: '#000'
       }
     })
