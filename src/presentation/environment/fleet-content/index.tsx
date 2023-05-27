@@ -1,3 +1,4 @@
+import { GoBack } from 'presentation/atomic-component/atom';
 import { VehicleModal } from 'presentation/atomic-component/molecule/modal';
 import { VehicleQuery } from 'presentation/atomic-component/organism';
 import { useParams } from 'react-router-dom';
@@ -8,13 +9,15 @@ export const FleetContent: FC = () => {
 
   return (
     <div>
+      <GoBack />
+
       <div className={'flex items-center gap-4 p-4'}>
         <h2>Veículos</h2>
         <VehicleModal fleetId={fleetId} />
       </div>
 
       <div>
-        <VehicleQuery />
+        <VehicleQuery fleetId={fleetId} />
       </div>
     </div>
   );

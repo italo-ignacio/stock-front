@@ -16,4 +16,5 @@ export * from './query-manager';
 export * from './cards';
 export * from './toggle-menu';
 export * from './select-image';
+export * from './go-back';
 export * from './validate-password';

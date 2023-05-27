@@ -2,7 +2,10 @@ import { QueryManager, VehicleCard } from 'presentation/atomic-component/atom';
 import { useFindVehicleQuery } from 'infra/cache';
 import type { FC } from 'react';
 
-export const VehicleQuery: FC = () => {
+interface VehicleQueryProps {
+  fleetId: string;
+}
+export const VehicleQuery: FC<VehicleQueryProps> = ({ fleetId }) => {
   const vehicleQuery = useFindVehicleQuery({
     page: 1
   });
@@ -12,7 +15,7 @@ export const VehicleQuery: FC = () => {
       <QueryManager query={vehicleQuery}>
         <div className={'flex flex-wrap gap-2'}>
           {vehicleQuery.data?.payload.map((vehicle) => (
-            <VehicleCard key={vehicle.id} {...vehicle} />
+            <VehicleCard key={vehicle.id} {...vehicle} fleetId={fleetId} />
           ))}
         </div>
       </QueryManager>

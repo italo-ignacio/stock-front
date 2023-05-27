@@ -111,6 +111,14 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
       MuiButton: {
         defaultProps: {
           variant: 'contained'
+        },
+        styleOverrides: {
+          containedPrimary: {
+            ':hover': {
+              backgroundColor: colors.gray[700]
+            },
+            backgroundColor: colors.gray[700]
+          }
         }
       },
 

@@ -37,7 +37,6 @@ export const DriverModal: FC<DriverModalProps> = ({ openElement }) => {
           </ListItemButton>
         )
       }
-      size={'80%'}
       title={'Novo motorista'}
     >
       <DriverForm closeModal={closeModal} />

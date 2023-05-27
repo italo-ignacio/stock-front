@@ -34,7 +34,7 @@ export default defineConfig({
         ],
         name: 'Controle de frotas',
         short_name: 'Controle de frotas',
-        theme_color: '#000'
+        theme_color: '#151519'
       }
     })
   ],
