@@ -14,6 +14,7 @@ export * from './toggle-theme';
 export * from './textarea';
 export * from './query-manager';
 export * from './numeric-input';
+export * from './date-picker';
 export * from './cards';
 export * from './toggle-menu';
 export * from './select-image';

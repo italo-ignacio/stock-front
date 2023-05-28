@@ -38,12 +38,12 @@ export const SelectImage: FC<SelectImageProps> = ({ multiple, onChange, variant 
                 sx={{
                   display: 'flex',
                   gap: '10px',
-                  height: '52px',
-                  padding: '5px'
+                  height: '70px',
+                  padding: '15px 8px'
                 }}
               >
                 <img
-                  className={'w-[50px] rounded-md  cursor-pointer'}
+                  className={'w-[56px] rounded-md  cursor-pointer'}
                   onClick={(): void => document.getElementById('select-image')?.click()}
                   src={img}
                 />
@@ -71,9 +71,8 @@ export const SelectImage: FC<SelectImageProps> = ({ multiple, onChange, variant 
                 boxShadow: theme === 'light' ? '0px 0px 8px 1px rgba(0, 0, 0, 0.2)' : '',
                 display: 'flex',
                 gap: '10px',
-                height: '52px',
-                padding: '5px',
-                paddingTop: '7px'
+                height: '70px',
+                padding: '15px 8px'
               }}
             >
               <span>
@@ -120,7 +119,7 @@ export const SelectImage: FC<SelectImageProps> = ({ multiple, onChange, variant 
       )}
 
       <input
-        accept={'.jpeg, .png, .webp, .avif'}
+        accept={'.jpeg, .png, .webp, .avif, .jpg'}
         className={'hidden'}
         id={'select-image'}
         multiple={multiple}

@@ -1,4 +1,5 @@
 import {
+  DatePicker,
   FormButton,
   LabelInput,
   NumericInput,
@@ -49,14 +50,18 @@ export const CostForm: FC<CostFormProps> = ({ closeModal, vehicleId }) => {
         onChange={({ target }): void => setValue('name', target.value, { shouldValidate: true })}
         placeholder={'Nome'}
         register={register('name')}
+        required
       />
 
       <NumericInput
         error={!!errors.value}
+        numberType={'monetary'}
         onValueChange={({ value }): void => setValue('value', value, { shouldValidate: true })}
         placeholder={'Valor'}
+        required
       />
 
+      <DatePicker placeholder={'Data do custo'} required />
       <FormButton isSubmitting={isSubmitting} label={'Cadastrar'} />
     </form>
   );

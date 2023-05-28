@@ -13,7 +13,6 @@ interface LabelInputProps {
   value?: string;
   label?: string;
   type?: string;
-  mask?: string;
   required?: boolean;
   placeholder?: string;
   children?: ReactNode;
@@ -38,7 +37,7 @@ export const LabelInput: FC<LabelInputProps> = ({ register, children, ...props }
       {props.label ? (
         <label className={'mb-[2px] min-w-max'}>
           {props.label}
-          {props.required ? <span> *</span> : ''}
+          {props.required ? <span className={'text-red'}> *</span> : ''}
         </label>
       ) : null}
 
@@ -70,7 +69,12 @@ export const LabelInput: FC<LabelInputProps> = ({ register, children, ...props }
           }}
           error={props.error}
           id={props.id}
-          label={props.placeholder}
+          label={
+            <span>
+              {props.placeholder}
+              {props.required ? <span className={'text-red'}> *</span> : ''}
+            </span>
+          }
           onBlur={props.onFocusOut}
           onChange={props.onChange ? props.onChange : register?.onChange}
           onFocus={props.onFocus}

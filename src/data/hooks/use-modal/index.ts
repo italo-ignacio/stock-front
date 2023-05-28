@@ -17,6 +17,7 @@ export const useModal = (): {
   };
 
   const closeModal = (): void => {
+    document.body.scrollTop = 0;
     setIsOpen(false);
   };
 
