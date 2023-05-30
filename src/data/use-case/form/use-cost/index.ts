@@ -44,8 +44,6 @@ export const useCost = ({
   });
 
   const onSubmit: SubmitHandler<CostRequest> = async ({ image, ...data }) => {
-    return console.log(data);
-
     try {
       let nameImage: string | undefined;
 

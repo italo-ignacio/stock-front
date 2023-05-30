@@ -3,7 +3,8 @@ import {
   FormButton,
   LabelInput,
   NumericInput,
-  SelectImage
+  SelectImage,
+  Textarea
 } from 'presentation/atomic-component/atom';
 import { useCost } from 'data/use-case';
 import { useEffect } from 'react';
@@ -24,7 +25,7 @@ export const CostForm: FC<CostFormProps> = ({ closeModal, vehicleId }) => {
       shouldValidate: true
     });
 
-    setValue('driverId', vehicleId, {
+    setValue('driverId', '91e6d515-01b4-4e45-b76f-7cf9ec61ca98', {
       shouldValidate: true
     });
   }, [vehicleId, setValue]);
@@ -62,6 +63,7 @@ export const CostForm: FC<CostFormProps> = ({ closeModal, vehicleId }) => {
       />
 
       <DatePicker placeholder={'Data do custo'} required />
+      <Textarea label={'Descrição'} />
       <FormButton isSubmitting={isSubmitting} label={'Cadastrar'} />
     </form>
   );

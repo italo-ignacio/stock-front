@@ -23,7 +23,7 @@ export const Heading: FC<HeadingProps> = ({ title, startElement, endElement }) =
 
     <span className={'w-full'}>
       <Divider
-        className={'bg-primary dark:bg-gray-350 border-0 border-red p-[1px] rounded-md'}
+        className={'bg-gray-700 dark:bg-gray-350 border-0 p-[1px] rounded-md'}
         sx={{
           border: '0'
         }}

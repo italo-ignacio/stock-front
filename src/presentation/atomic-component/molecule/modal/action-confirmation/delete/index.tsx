@@ -70,7 +70,9 @@ export const DeleteConfirmationModal: FC<DeleteConfirmationModalProps> = ({
         </span>
 
         <div className={'flex flex-row gap-4  justify-between items-center'}>
-          <Button onClick={handleDelete}>Sim</Button>
+          <Button autoFocus onClick={handleDelete}>
+            Sim
+          </Button>
 
           <Button onClick={closeModal} variant={'outlined'}>
             Não

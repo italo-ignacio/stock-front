@@ -61,7 +61,12 @@ export const Modal: FC<ModalProps> = ({ children, openModal, closeModal, ...prop
       props.openModalElement
     )}
 
-    <ModalUI hideBackdrop={props.disableBackdrop} onClose={closeModal} open={props.isOpen}>
+    <ModalUI
+      disableRestoreFocus
+      hideBackdrop={props.disableBackdrop}
+      onClose={closeModal}
+      open={props.isOpen}
+    >
       <div>
         {props.disableBackdrop ? (
           <div className={'absolute overflow-hidden top-0 left-0 w-full h-screen bg-[#0000007f]'} />

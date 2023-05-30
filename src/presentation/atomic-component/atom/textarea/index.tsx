@@ -34,7 +34,6 @@ export const Textarea: FC<TextareaProps> = ({ maxLength, rows, register, ...prop
 
           setInputLength(value?.length);
         }}
-        variant={'standard'}
         {...props}
         {...register}
       />

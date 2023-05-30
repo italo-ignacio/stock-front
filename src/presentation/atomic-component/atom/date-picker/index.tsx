@@ -35,6 +35,24 @@ export const DatePicker: FC<DatePickerProps> = ({ ...props }) => {
     return '';
   };
 
+  const css = `
+    .rdp-dropdown{ 
+      width:110px;
+      padding-left: 15px;  
+      cursor:pointer;
+    }
+
+    .rdp-dropdown option:hover{
+      background-color:red !important;
+    }
+    
+    .rdp-caption_label{
+      background:white !important;
+      border: 0 !important;
+      cursor:pointer;
+    }
+  `;
+
   return (
     <SimpleMenu
       isOpen={isOpen}
@@ -58,7 +76,10 @@ export const DatePicker: FC<DatePickerProps> = ({ ...props }) => {
       setIsOpen={setIsOpen}
       side={'top'}
     >
+      <style>{css}</style>
+
       <DayPicker
+        captionLayout={'dropdown-buttons'}
         classNames={{
           button:
             theme === 'light'
@@ -79,6 +100,7 @@ export const DatePicker: FC<DatePickerProps> = ({ ...props }) => {
             </Button>
           </div>
         }
+        fromYear={2013}
         locale={ptBR}
         mode={'single'}
         modifiersStyles={{
@@ -99,6 +121,7 @@ export const DatePicker: FC<DatePickerProps> = ({ ...props }) => {
         style={{
           color: theme === 'dark' ? 'white' : ''
         }}
+        toYear={new Date().getFullYear() + 10}
       />
     </SimpleMenu>
   );

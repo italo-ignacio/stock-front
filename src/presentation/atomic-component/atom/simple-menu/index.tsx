@@ -47,9 +47,9 @@ export const SimpleMenu: FC<SimpleMenuProps> = ({
       case 'left':
         return { horizontal: 'left', vertical: 'top' };
       case 'bottom':
-        return { horizontal: 'center', vertical: 'top' };
-      default:
         return { horizontal: 'center', vertical: 'bottom' };
+      default:
+        return { horizontal: 'center', vertical: 'top' };
     }
   };
 
