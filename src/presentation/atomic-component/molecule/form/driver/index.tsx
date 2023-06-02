@@ -40,7 +40,6 @@ export const DriverForm: FC<DriverFormProps> = ({ closeModal }) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <LabelInput
-        color={'secondary'}
         error={!!errors.name}
         onChange={({ target }): void => setValue('name', target.value, { shouldValidate: true })}
         placeholder={'Nome'}
@@ -48,7 +47,6 @@ export const DriverForm: FC<DriverFormProps> = ({ closeModal }) => {
       />
 
       <LabelInput
-        color={'secondary'}
         error={!!errors.email}
         onChange={({ target }): void => setValue('email', target.value, { shouldValidate: true })}
         placeholder={'E-mail'}

@@ -56,7 +56,6 @@ export const VehicleForm: FC<VehicleFormProps> = ({ closeModal, fleetId }) => {
       />
 
       <LabelInput
-        color={'secondary'}
         error={!!errors.name}
         onChange={({ target }): void => setValue('name', target.value, { shouldValidate: true })}
         placeholder={'Nome'}
@@ -64,17 +63,16 @@ export const VehicleForm: FC<VehicleFormProps> = ({ closeModal, fleetId }) => {
       />
 
       <LabelInput
-        color={'secondary'}
         error={!!errors.licensePlate}
         onChange={({ target }): void =>
           setValue('licensePlate', target.value, { shouldValidate: true })
         }
         placeholder={'Placa'}
         register={register('licensePlate')}
+        uppercase
       />
 
       <LabelInput
-        color={'secondary'}
         error={!!errors.type}
         onChange={({ target }): void => setValue('type', target.value, { shouldValidate: true })}
         placeholder={'Tipo'}

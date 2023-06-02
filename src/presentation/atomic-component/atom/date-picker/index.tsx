@@ -7,17 +7,23 @@ import { colors } from 'presentation/style';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useAppSelector } from 'store';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { FC } from 'react';
 
 interface DatePickerProps {
   placeholder: string;
   required?: boolean;
+  onChange: (newDate: Date | undefined) => void;
 }
-export const DatePicker: FC<DatePickerProps> = ({ ...props }) => {
+
+export const DatePicker: FC<DatePickerProps> = ({ onChange, placeholder, required }) => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [isOpen, setIsOpen] = useState(false);
   const { theme } = useAppSelector((state) => state.theme);
+
+  useEffect(() => {
+    onChange(date);
+  }, [date, onChange]);
 
   const convertDate = (dateToConvert?: Date): string => {
     if (dateToConvert) {
@@ -65,8 +71,8 @@ export const DatePicker: FC<DatePickerProps> = ({ ...props }) => {
             defaultValue={convertDate(date)}
             label={
               <span>
-                {props.placeholder}
-                {props.required ? <span className={'text-red'}> *</span> : ''}
+                {placeholder}
+                {required ? <span className={'text-red'}> *</span> : ''}
               </span>
             }
             value={convertDate(date)}
@@ -116,7 +122,7 @@ export const DatePicker: FC<DatePickerProps> = ({ ...props }) => {
           setDate(selectedDate);
           setIsOpen(false);
         }}
-        required={props.required}
+        required={required}
         selected={date}
         style={{
           color: theme === 'dark' ? 'white' : ''

@@ -43,29 +43,30 @@ export const useCost = ({
     resolver: yupResolver(costSchema)
   });
 
-  const onSubmit: SubmitHandler<CostRequest> = async ({ image, ...data }) => {
+  const onSubmit: SubmitHandler<CostRequest> = async ({
+    image,
+    name,
+    value,
+    vehicleId,
+    driverId,
+    date,
+    description
+  }) => {
     try {
-      let nameImage: string | undefined;
+      const formData = new FormData();
 
-      if (image) {
-        const formData = new FormData();
+      formData.append('name', name);
+      formData.append('value', value);
+      formData.append('vehicleId', vehicleId);
+      formData.append('driverId', `${driverId}`);
+      formData.append('date', `${date}`);
 
-        formData.append('image', image);
-
-        const {
-          payload: { filename }
-        } = await api.post<{ payload: { filename: string } }>({
-          body: formData,
-          isFormData: true,
-          route: apiPaths.image
-        });
-
-        nameImage = filename;
-      }
-      if (nameImage) Object.assign(data, { ...data, image: nameImage });
+      if (image) formData.append('image', image);
+      if (description) formData.append('description', `${description}`);
 
       await api.post({
-        body: data,
+        body: formData,
+        isFormData: true,
         route: apiPaths.cost
       });
 

@@ -19,6 +19,7 @@ const redirectSlice = createSlice({
   }
 });
 
-export const { setRedirect } = redirectSlice.actions;
-
-export default redirectSlice.reducer;
+export const {
+  reducer: redirectReducer,
+  actions: { setRedirect }
+} = redirectSlice;

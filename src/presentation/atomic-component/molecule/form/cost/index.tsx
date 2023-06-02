@@ -3,12 +3,19 @@ import {
   FormButton,
   LabelInput,
   NumericInput,
+  Select,
   SelectImage,
   Textarea
 } from 'presentation/atomic-component/atom';
+import { convertToSelect } from 'main/utils';
 import { useCost } from 'data/use-case';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useFindDriverQuery } from 'infra/cache';
 import type { FC } from 'react';
+import type { SelectValues } from 'presentation/atomic-component/atom';
+import { getUser } from 'store/auth/action';
+import { UseQueryResult } from 'react-query';
+import type { VehicleFleetResponse } from 'domain/models';
 
 interface CostFormProps {
   closeModal: () => void;
@@ -20,15 +27,48 @@ export const CostForm: FC<CostFormProps> = ({ closeModal, vehicleId }) => {
     closeModal
   });
 
+  const [valueInput, setValueInput] = useState<SelectValues | null>(null);
+
+  const [list, setList] = useState<SelectValues[]>([]);
+
+  let driverQuery: UseQueryResult<VehicleFleetResponse> | null = null;
+
+  const { role, id } = getUser();
+
+  if (role === 'account')
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    driverQuery = useFindDriverQuery({
+      page: 1
+    });
+
+  useEffect(() => {
+    if (driverQuery)
+      if (driverQuery.isSuccess && driverQuery.data.payload)
+        setList(convertToSelect(driverQuery.data.payload));
+  }, [driverQuery, driverQuery?.data, driverQuery?.isSuccess]);
+
+  useEffect(() => {
+    if (list.length >= 1) setValueInput(list[0]);
+  }, [list]);
+
   useEffect(() => {
     setValue('vehicleId', vehicleId, {
       shouldValidate: true
     });
+  }, [vehicleId, setValue]);
 
-    setValue('driverId', '91e6d515-01b4-4e45-b76f-7cf9ec61ca98', {
+  useEffect(() => {
+    if (role === 'driver')
+      setValue('driverId', id, {
+        shouldValidate: true
+      });
+  }, [id, role, setValue]);
+
+  useEffect(() => {
+    setValue('driverId', valueInput?.value, {
       shouldValidate: true
     });
-  }, [vehicleId, setValue]);
+  }, [valueInput, setValue]);
 
   return (
     <form
@@ -62,8 +102,28 @@ export const CostForm: FC<CostFormProps> = ({ closeModal, vehicleId }) => {
         required
       />
 
-      <DatePicker placeholder={'Data do custo'} required />
-      <Textarea label={'Descrição'} />
+      <DatePicker
+        onChange={(date): void => setValue('date', date)}
+        placeholder={'Data do custo'}
+        required
+      />
+
+      <Textarea
+        label={'Descrição'}
+        onChange={(event): void => setValue('description', event.target.value)}
+      />
+
+      {role === 'account' ? (
+        <Select
+          change={(value): void => {
+            setValueInput(value as SelectValues);
+          }}
+          label={'Motorista'}
+          options={list}
+          valueInput={valueInput}
+        />
+      ) : null}
+
       <FormButton isSubmitting={isSubmitting} label={'Cadastrar'} />
     </form>
   );

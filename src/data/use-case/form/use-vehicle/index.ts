@@ -42,29 +42,29 @@ export const useVehicle = ({
     resolver: yupResolver(vehicleSchema)
   });
 
-  const onSubmit: SubmitHandler<VehicleRequest> = async ({ image, ...data }) => {
+  const onSubmit: SubmitHandler<VehicleRequest> = async ({
+    image,
+    licensePlate,
+    name,
+    type,
+    vehicleFleetId,
+    driverList
+  }) => {
     try {
-      let nameImage: string | undefined;
+      const formData = new FormData();
 
-      if (image) {
-        const formData = new FormData();
+      formData.append('licensePlate', licensePlate);
+      formData.append('name', name);
+      formData.append('type', type);
+      formData.append('vehicleFleetId', vehicleFleetId);
 
-        formData.append('image', image);
-
-        const {
-          payload: { filename }
-        } = await api.post<{ payload: { filename: string } }>({
-          body: formData,
-          isFormData: true,
-          route: apiPaths.image
-        });
-
-        nameImage = filename;
-      }
-      if (nameImage) Object.assign(data, { ...data, image: nameImage });
+      if (image) formData.append('image', image);
+      if (driverList && driverList.length > 0)
+        formData.append('driverList', driverList?.toString());
 
       await api.post({
-        body: data,
+        body: formData,
+        isFormData: true,
         route: apiPaths.vehicle
       });
 

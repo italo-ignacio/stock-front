@@ -11,7 +11,7 @@ import type { FC } from 'react';
 
 interface SelectImageProps {
   multiple?: boolean;
-  onChange: (item: File | null) => void;
+  onChange: (item: File | undefined) => void;
   variant?: 'primary' | 'secondary';
 }
 
@@ -55,7 +55,7 @@ export const SelectImage: FC<SelectImageProps> = ({ multiple, onChange, variant 
                 onClick={(): void => {
                   setImg('');
                   setTitle('');
-                  onChange(null);
+                  onChange(undefined);
                 }}
               >
                 <RemoveCircleOutline color={'error'} />
@@ -105,7 +105,7 @@ export const SelectImage: FC<SelectImageProps> = ({ multiple, onChange, variant 
                 onClick={(): void => {
                   setImg('');
                   setTitle('');
-                  onChange(null);
+                  onChange(undefined);
                 }}
                 variant={'text'}
               >
@@ -132,7 +132,7 @@ export const SelectImage: FC<SelectImageProps> = ({ multiple, onChange, variant 
               setImg(URL.createObjectURL(event.target.files[0]));
               setTitle(event.target.files[0].name);
             }
-          else onChange(null);
+          else onChange(undefined);
           Object.assign(event.target, { value: '' });
         }}
         type={'file'}

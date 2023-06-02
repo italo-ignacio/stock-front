@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-nested-ternary */
 import { IconButton, TextField } from '@mui/material';
 import { colors } from 'presentation/style';
@@ -13,6 +14,7 @@ interface LabelInputProps {
   value?: string;
   label?: string;
   type?: string;
+  uppercase?: boolean;
   required?: boolean;
   placeholder?: string;
   children?: ReactNode;
@@ -69,6 +71,11 @@ export const LabelInput: FC<LabelInputProps> = ({ register, children, ...props }
           }}
           error={props.error}
           id={props.id}
+          inputProps={{
+            style: {
+              textTransform: props.uppercase ? 'uppercase' : 'none'
+            }
+          }}
           label={
             <span>
               {props.placeholder}

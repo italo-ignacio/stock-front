@@ -1,30 +1,29 @@
+import { authReducer } from './auth/slice';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
+import { redirectReducer } from './redirect/slice';
+import { sidebarReducer } from './sidebar/slice';
+import { themeReducer } from './theme/slice';
 import { useSelector } from 'react-redux';
-import authReducer from './auth/slice';
-import redirectReducer from './redirect/slice';
-import sidebarReducer from './sidebar/slice';
 import storage from 'redux-persist/lib/storage';
-import themeReducer from './theme/slice';
 import thunkMiddleware from 'redux-thunk';
 import type { TypedUseSelectorHook } from 'react-redux';
 
 const persistConfig = {
   key: 'root',
-  storage,
-  whitelist: ['auth', 'redirect', 'theme', 'sidebar']
+  storage
 };
 
+const persistedAuth = persistReducer(persistConfig, authReducer);
+
 const rootReducer = combineReducers({
-  auth: authReducer,
+  auth: persistedAuth,
   redirect: redirectReducer,
   sidebar: sidebarReducer,
   theme: themeReducer
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-export const store = configureStore({ middleware: [thunkMiddleware], reducer: persistedReducer });
+export const store = configureStore({ middleware: [thunkMiddleware], reducer: rootReducer });
 export const persister = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;

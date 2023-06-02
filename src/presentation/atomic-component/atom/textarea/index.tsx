@@ -38,7 +38,7 @@ export const Textarea: FC<TextareaProps> = ({ maxLength, rows, register, ...prop
         {...register}
       />
 
-      <span className={'mt-[-19px] mr-[10px] text-[12px] ml-auto z-10'}>
+      <span className={'mt-[-19px] mr-[10px] text-[12px] ml-auto z-10 dark:text-white'}>
         {inputLength}/{maxLength}
       </span>
     </div>

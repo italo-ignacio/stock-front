@@ -19,6 +19,9 @@ const SidebarSlice = createSlice({
   }
 });
 
-export const { setSidebar } = SidebarSlice.actions;
-
 export default SidebarSlice.reducer;
+
+export const {
+  reducer: sidebarReducer,
+  actions: { setSidebar }
+} = SidebarSlice;

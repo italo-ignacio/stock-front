@@ -1,5 +1,7 @@
 export interface VehicleFleetResponse {
-  id: string;
-  name: string;
-  vehicle: string;
+  payload: {
+    id: string;
+    name: string;
+    vehicle: string;
+  }[];
 }

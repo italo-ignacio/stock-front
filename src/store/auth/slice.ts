@@ -5,10 +5,12 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 interface AuthState {
   accessToken: string | null;
   refreshToken: string | null;
+  data: string | null;
 }
 
 const initialState: AuthState = {
   accessToken: null,
+  data: null,
   refreshToken: null
 };
 
@@ -25,10 +27,14 @@ const authSlice = createSlice({
     },
     setTokenOnRefresh(state: AuthState, action: PayloadAction<RefreshTokenSuccessAction>) {
       state.accessToken = action.payload.accessToken;
+    },
+    setUser(state: AuthState, action: PayloadAction<{ data: string }>) {
+      state.data = action.payload.data;
     }
   }
 });
 
-export const { setAuth, setTokenOnRefresh, logout } = authSlice.actions;
-
-export default authSlice.reducer;
+export const {
+  reducer: authReducer,
+  actions: { setAuth, setTokenOnRefresh, logout, setUser }
+} = authSlice;

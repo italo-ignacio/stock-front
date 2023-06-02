@@ -12,7 +12,7 @@ interface useFindVehicleFleetQueryProps {
 export const useFindVehicleFleetQuery = ({
   page,
   search
-}: useFindVehicleFleetQueryProps): UseQueryResult<{ payload: VehicleFleetResponse[] }> =>
+}: useFindVehicleFleetQueryProps): UseQueryResult<VehicleFleetResponse> =>
   useQuery([QueryName.vehicleFleet, page, search], () =>
     api.get({
       queryParams: { limit: 10, page, search },
