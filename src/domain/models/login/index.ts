@@ -4,6 +4,7 @@ export interface LoginResponse {
     refreshToken: string;
   };
 }
+
 export interface UserProps {
   id: string;
   name: string;

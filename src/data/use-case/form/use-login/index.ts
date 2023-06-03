@@ -1,9 +1,9 @@
 import { api } from 'infra/http';
 import { apiPaths, paths } from 'main/config';
-import { encryptData, resolverError } from 'main/utils';
+import { convertUser, encryptData, resolverError } from 'main/utils';
 import { getRedirectPath } from 'store/redirect/selector';
 import { loginSchema } from 'validation/schema';
-import { setAuth } from 'store/auth/slice';
+import { setAuth, setUser } from 'store/auth/slice';
 import { setRedirect } from 'store/redirect/slice';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
@@ -58,6 +58,9 @@ export const useLogin = (): {
           refreshToken: encryptData(payload.refreshToken)
         })
       );
+      console.log(convertUser());
+
+      dispatch(setUser({ data: encryptData(JSON.stringify(convertUser())) }));
 
       toast.success('Logado com sucesso');
 

@@ -1,19 +1,13 @@
 import { decryptData } from 'main/utils/crypto';
 import { store } from 'store';
 import jwtDecode from 'jwt-decode';
-import type { Role } from 'domain/enums';
+import type { UserProps } from 'domain/models';
 
-interface tokenProps {
+interface tokenProps extends UserProps {
   sub: string;
   iss: string;
   exp: number;
   iat: number;
-  user: {
-    name: string;
-    role: Role;
-    id: string;
-    email: string;
-  };
 }
 
 const defaultValues = {

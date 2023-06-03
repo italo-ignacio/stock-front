@@ -4,7 +4,7 @@ import { Button, TextField } from '@mui/material';
 import { DayPicker } from 'react-day-picker';
 import { SimpleMenu } from 'presentation/atomic-component/atom/simple-menu';
 import { colors } from 'presentation/style';
-import { format } from 'date-fns';
+import { format, isToday } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useAppSelector } from 'store';
 import { useEffect, useState } from 'react';
@@ -27,9 +27,7 @@ export const DatePicker: FC<DatePickerProps> = ({ onChange, placeholder, require
 
   const convertDate = (dateToConvert?: Date): string => {
     if (dateToConvert) {
-      const day = new Date().getDay();
-
-      if (day === dateToConvert.getDay())
+      if (isToday(dateToConvert))
         return `Hoje ${format(dateToConvert, 'P', {
           locale: ptBR
         })}`;
@@ -44,6 +42,8 @@ export const DatePicker: FC<DatePickerProps> = ({ onChange, placeholder, require
   const css = `
     .rdp-dropdown{ 
       width:110px;
+      background:${theme === 'light' ? '' : colors.gray[800]} ;
+      border: 0;
       padding-left: 15px;  
       cursor:pointer;
     }
@@ -53,10 +53,11 @@ export const DatePicker: FC<DatePickerProps> = ({ onChange, placeholder, require
     }
     
     .rdp-caption_label{
-      background:white !important;
+      background:${theme === 'light' ? 'white !important' : `${colors.gray[900]} !important`} ;
       border: 0 !important;
       cursor:pointer;
     }
+ 
   `;
 
   return (

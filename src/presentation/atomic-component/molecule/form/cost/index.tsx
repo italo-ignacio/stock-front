@@ -8,13 +8,13 @@ import {
   Textarea
 } from 'presentation/atomic-component/atom';
 import { convertToSelect } from 'main/utils';
+import { getUser } from 'store/auth/action';
 import { useCost } from 'data/use-case';
 import { useEffect, useState } from 'react';
 import { useFindDriverQuery } from 'infra/cache';
 import type { FC } from 'react';
 import type { SelectValues } from 'presentation/atomic-component/atom';
-import { getUser } from 'store/auth/action';
-import { UseQueryResult } from 'react-query';
+import type { UseQueryResult } from 'react-query';
 import type { VehicleFleetResponse } from 'domain/models';
 
 interface CostFormProps {
