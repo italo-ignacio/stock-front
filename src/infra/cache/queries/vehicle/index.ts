@@ -1,21 +1,12 @@
-import { QueryName, apiPaths } from 'main/config';
-import { api } from 'infra/http';
-import { useQuery } from 'react-query';
-import type { FindVehicleResponse } from 'domain/models';
+import { useFindQuery } from 'infra/cache/queries/default-query';
+import type { FindVehicleResponse, Vehicle } from 'domain/models';
 import type { UseQueryResult } from 'react-query';
-
-interface useFindVehicleQueryProps {
-  page: number;
-  search?: string;
-}
+import type { useFindQueryProps } from 'infra/cache/queries/default-query';
 
 export const useFindVehicleQuery = ({
-  page,
-  search
-}: useFindVehicleQueryProps): UseQueryResult<FindVehicleResponse> =>
-  useQuery([QueryName.vehicle, page, search], () =>
-    api.get({
-      queryParams: { limit: 10, page, search },
-      route: apiPaths.vehicle
-    })
-  );
+  ...props
+}: useFindQueryProps): UseQueryResult<FindVehicleResponse> =>
+  useFindQuery<FindVehicleResponse>({ ...props, route: 'vehicle' });
+
+export const useFindOneVehicleQuery = ({ ...props }: useFindQueryProps): UseQueryResult<Vehicle> =>
+  useFindQuery<Vehicle>({ ...props, route: 'vehicle' });

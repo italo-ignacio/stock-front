@@ -1,11 +1,11 @@
 import { Add } from '@mui/icons-material';
+import { FleetForm } from 'presentation/atomic-component/molecule/form';
 import { IconButton } from '@mui/material';
 import { Modal } from 'presentation/atomic-component/atom';
-import { VehicleFleetForm } from 'presentation/atomic-component/molecule/form';
 import { useModal } from 'data/hooks';
 import type { FC } from 'react';
 
-export const VehicleFleetModal: FC = () => {
+export const FleetModal: FC = () => {
   const { closeModal, isOpen, openModal } = useModal();
 
   return (
@@ -19,7 +19,7 @@ export const VehicleFleetModal: FC = () => {
         </IconButton>
       }
     >
-      <VehicleFleetForm closeModal={closeModal} />
+      <FleetForm closeModal={closeModal} />
     </Modal>
   );
 };

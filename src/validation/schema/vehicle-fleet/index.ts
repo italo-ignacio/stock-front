@@ -1,8 +1,8 @@
 import { object, string } from 'yup';
 import type { InferType } from 'yup';
 
-export const vehicleFleetSchema = object().shape({
+export const fleetSchema = object().shape({
   name: string().required()
 });
 
-export type VehicleFleetRequest = InferType<typeof vehicleFleetSchema>;
+export type FleetRequest = InferType<typeof fleetSchema>;

@@ -2,7 +2,7 @@ import { FormButton, LabelInput, Select } from 'presentation/atomic-component/at
 import { convertList, convertToSelect } from 'main/utils';
 import { useDriver } from 'data/use-case';
 import { useEffect, useState } from 'react';
-import { useFindVehicleFleetQuery } from 'infra/cache';
+import { useFindFleetQuery } from 'infra/cache';
 import type { FC } from 'react';
 import type { SelectValues } from 'presentation/atomic-component/atom';
 
@@ -18,18 +18,18 @@ export const DriverForm: FC<DriverFormProps> = ({ closeModal }) => {
 
   const [list, setList] = useState<SelectValues[]>([]);
 
-  const vehicleFleetQuery = useFindVehicleFleetQuery({
+  const fleetQuery = useFindFleetQuery({
     page: 1
   });
 
   useEffect(() => {
-    if (vehicleFleetQuery.isSuccess && vehicleFleetQuery.data.payload)
-      setList(convertToSelect(vehicleFleetQuery.data.payload));
-  }, [vehicleFleetQuery.data, vehicleFleetQuery.isSuccess]);
+    if (fleetQuery.isSuccess && fleetQuery.data.payload)
+      setList(convertToSelect(fleetQuery.data.payload));
+  }, [fleetQuery.data, fleetQuery.isSuccess]);
 
   useEffect(() => {
     if (valueInput)
-      setValue('vehicleFleetList', convertList(valueInput), {
+      setValue('fleetList', convertList(valueInput), {
         shouldValidate: true
       });
   }, [setValue, valueInput]);

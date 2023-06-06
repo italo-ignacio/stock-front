@@ -30,7 +30,6 @@ export const LoginForm: FC<{ isDriver: boolean }> = ({ isDriver }) => {
       </div>
 
       <LabelInput
-        color={'secondary'}
         error={!!errors.email}
         onChange={({ target }): void => setValue('email', target.value, { shouldValidate: true })}
         placeholder={'E-mail'}
@@ -40,7 +39,6 @@ export const LoginForm: FC<{ isDriver: boolean }> = ({ isDriver }) => {
 
       <LabelInput
         EndIcon={showPassword ? VisibilityOff : Visibility}
-        color={'secondary'}
         error={!!errors.password}
         handleEndFunction={handleClickShowPassword}
         placeholder={'Senha'}

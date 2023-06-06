@@ -44,7 +44,7 @@ export const useDriver = ({
     try {
       await api.post({
         body: data,
-        route: apiPaths.driver.all
+        route: apiPaths.driver
       });
 
       toast.success('Motorista cadastrado com sucesso');

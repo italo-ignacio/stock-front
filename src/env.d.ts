@@ -3,6 +3,7 @@
 interface ImportMetaEnv {
   readonly VITE_API_URL: string;
   readonly VITE_CRYPTO_KEY: string;
+  readonly VITE_GOOGLE_KEY: string;
 }
 
 interface ImportMeta {

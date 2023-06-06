@@ -14,7 +14,7 @@ export const AuthContent: FC = () => {
         'flex flex-col relative justify-center items-center p-5 pt-10 gap-3 w-[90%] h-min overflow-auto dark:bg-gray-800 laptop:max-w-[450px]'
       }
     >
-      {isLogin ? <LoginForm isDriver={isDriver} /> : <RegisterForm setIsLogin={setIsLogin} />}
+      {isLogin ? <LoginForm isDriver={isDriver} /> : <RegisterForm />}
 
       <div className={'flex flex-col items-center justify-center gap-4'}>
         {isLogin ? (

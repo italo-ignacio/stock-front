@@ -47,7 +47,7 @@ export const useVehicle = ({
     licensePlate,
     name,
     type,
-    vehicleFleetId,
+    fleetId,
     driverList
   }) => {
     try {
@@ -56,7 +56,7 @@ export const useVehicle = ({
       formData.append('licensePlate', licensePlate);
       formData.append('name', name);
       formData.append('type', type);
-      formData.append('vehicleFleetId', vehicleFleetId);
+      formData.append('fleetId', fleetId);
 
       if (image) formData.append('image', image);
       if (driverList && driverList.length > 0)

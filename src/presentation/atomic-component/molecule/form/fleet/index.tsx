@@ -1,12 +1,12 @@
 import { FormButton, LabelInput } from 'presentation/atomic-component/atom';
-import { useVehicleFleet } from 'data/use-case';
+import { useFleet } from 'data/use-case';
 import type { FC } from 'react';
 
-interface VehicleFleetFormProps {
+interface FleetFormProps {
   closeModal: () => void;
 }
-export const VehicleFleetForm: FC<VehicleFleetFormProps> = ({ closeModal }) => {
-  const { handleSubmit, onSubmit, register, errors, setValue, isSubmitting } = useVehicleFleet({
+export const FleetForm: FC<FleetFormProps> = ({ closeModal }) => {
+  const { handleSubmit, onSubmit, register, errors, setValue, isSubmitting } = useFleet({
     closeModal
   });
 
@@ -20,7 +20,6 @@ export const VehicleFleetForm: FC<VehicleFleetFormProps> = ({ closeModal }) => {
       </div>
 
       <LabelInput
-        color={'secondary'}
         error={!!errors.name}
         onChange={({ target }): void => setValue('name', target.value, { shouldValidate: true })}
         placeholder={'Nome'}

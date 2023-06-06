@@ -17,19 +17,23 @@ export const paths = {
 };
 
 export const apiPaths = {
-  account: {
-    all: '/account',
-    auth: '/auth/account'
+  account: '/account',
+  activeDriver: '/driver/active',
+  auth: {
+    account: '/auth/account',
+    driver: '/auth/driver'
   },
   cost: '/cost',
-  driver: {
-    active: '/driver/active',
-    all: '/driver',
-    auth: '/auth/driver',
-    disable: '/driver/disable'
+  disableDriver: '/driver/disable',
+  driver: '/driver',
+  fleet: '/fleet',
+  recoverPassword: {
+    account: '/auth/account/recover-password',
+    driver: '/auth/driver/recover-password'
   },
-  image: '/image',
   refreshToken: '/auth/refresh-token',
   vehicle: '/vehicle',
-  vehicleFleet: '/vehicle-fleet'
+  work: '/work'
 };
+
+export type listQuery = 'account' | 'cost' | 'driver' | 'fleet' | 'vehicle' | 'work';

@@ -31,7 +31,7 @@ export const VehicleForm: FC<VehicleFormProps> = ({ closeModal, fleetId }) => {
   }, [driverQuery.data, driverQuery.isSuccess]);
 
   useEffect(() => {
-    setValue('vehicleFleetId', fleetId, {
+    setValue('fleetId', fleetId, {
       shouldValidate: true
     });
   }, [fleetId, setValue]);

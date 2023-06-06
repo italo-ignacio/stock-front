@@ -1,10 +1,10 @@
 import { api } from 'infra/http';
 import { apiPaths } from 'main/config';
+import { fleetSchema } from 'validation/schema';
 import { queryClient } from 'infra/lib';
 import { resolverError } from 'main/utils';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
-import { vehicleFleetSchema } from 'validation/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import type {
   FieldErrors,
@@ -14,20 +14,20 @@ import type {
   UseFormRegister,
   UseFormSetValue
 } from 'react-hook-form';
-import type { VehicleFleetRequest } from 'validation/schema';
+import type { FleetRequest } from 'validation/schema';
 
-interface useVehicleFleetProps {
+interface useFleetProps {
   closeModal: () => void;
 }
-export const useVehicleFleet = ({
+export const useFleet = ({
   closeModal
-}: useVehicleFleetProps): {
-  errors: FieldErrors<VehicleFleetRequest>;
-  register: UseFormRegister<VehicleFleetRequest>;
-  onSubmit: SubmitHandler<VehicleFleetRequest>;
-  handleSubmit: UseFormHandleSubmit<VehicleFleetRequest>;
-  getValues: UseFormGetValues<VehicleFleetRequest>;
-  setValue: UseFormSetValue<VehicleFleetRequest>;
+}: useFleetProps): {
+  errors: FieldErrors<FleetRequest>;
+  register: UseFormRegister<FleetRequest>;
+  onSubmit: SubmitHandler<FleetRequest>;
+  handleSubmit: UseFormHandleSubmit<FleetRequest>;
+  getValues: UseFormGetValues<FleetRequest>;
+  setValue: UseFormSetValue<FleetRequest>;
   isSubmitting: boolean;
 } => {
   const {
@@ -36,17 +36,17 @@ export const useVehicleFleet = ({
     setValue,
     getValues,
     formState: { errors, isSubmitting }
-  } = useForm<VehicleFleetRequest>({
-    resolver: yupResolver(vehicleFleetSchema)
+  } = useForm<FleetRequest>({
+    resolver: yupResolver(fleetSchema)
   });
 
-  const onSubmit: SubmitHandler<VehicleFleetRequest> = async (data) => {
+  const onSubmit: SubmitHandler<FleetRequest> = async (data) => {
     try {
       await api.post({
         body: data,
-        route: apiPaths.vehicleFleet
+        route: apiPaths.fleet
       });
-      queryClient.invalidateQueries('vehicleFleet');
+      queryClient.invalidateQueries('fleet');
       closeModal();
       toast.success('Cadastrado com sucesso');
     } catch (err) {

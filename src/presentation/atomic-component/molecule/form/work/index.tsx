@@ -1,7 +1,5 @@
 import { DriverModal } from 'presentation/atomic-component/molecule/modal/driver';
 import { FormButton, LabelInput, Select, SelectImage } from 'presentation/atomic-component/atom';
-import { IconButton, Switch, Tooltip } from '@mui/material';
-import { Info } from '@mui/icons-material';
 import { convertList, convertToSelect } from 'main/utils';
 import { useEffect, useState } from 'react';
 import { useFindDriverQuery } from 'infra/cache';
@@ -15,8 +13,9 @@ interface WorkFormProps {
 }
 
 export const WorkForm: FC<WorkFormProps> = ({ closeModal, vehicleId }) => {
-  const { handleSubmit, onSubmit, register, errors, setValue, getValues, isSubmitting } =
-    useVehicle({ closeModal });
+  const { handleSubmit, onSubmit, register, errors, setValue, isSubmitting } = useVehicle({
+    closeModal
+  });
 
   const [valueInput, setValueInput] = useState<SelectValues[]>([]);
 
@@ -32,7 +31,7 @@ export const WorkForm: FC<WorkFormProps> = ({ closeModal, vehicleId }) => {
   }, [driverQuery.data, driverQuery.isSuccess]);
 
   useEffect(() => {
-    setValue('vehicleFleetId', vehicleId, {
+    setValue('fleetId', vehicleId, {
       shouldValidate: true
     });
   }, [vehicleId, setValue]);
@@ -57,7 +56,6 @@ export const WorkForm: FC<WorkFormProps> = ({ closeModal, vehicleId }) => {
       />
 
       <LabelInput
-        color={'secondary'}
         error={!!errors.name}
         onChange={({ target }): void => setValue('name', target.value, { shouldValidate: true })}
         placeholder={'Nome'}
@@ -65,7 +63,6 @@ export const WorkForm: FC<WorkFormProps> = ({ closeModal, vehicleId }) => {
       />
 
       <LabelInput
-        color={'secondary'}
         error={!!errors.licensePlate}
         onChange={({ target }): void =>
           setValue('licensePlate', target.value, { shouldValidate: true })
@@ -75,7 +72,6 @@ export const WorkForm: FC<WorkFormProps> = ({ closeModal, vehicleId }) => {
       />
 
       <LabelInput
-        color={'secondary'}
         error={!!errors.type}
         onChange={({ target }): void => setValue('type', target.value, { shouldValidate: true })}
         placeholder={'Tipo'}
@@ -94,31 +90,6 @@ export const WorkForm: FC<WorkFormProps> = ({ closeModal, vehicleId }) => {
         />
 
         <DriverModal />
-      </div>
-
-      <div className={'flex flex-col justify-center items-center'}>
-        <div className={'flex gap-2 justify-center items-center dark:text-white'}>
-          <div>Aprovar custos automaticamente:</div>
-
-          <Tooltip
-            enterTouchDelay={0}
-            leaveTouchDelay={50000}
-            title={'Quando o motorista cadastrar um custo ele será aprovado automaticamente'}
-          >
-            <IconButton>
-              <Info color={'info'} />
-            </IconButton>
-          </Tooltip>
-        </div>
-
-        <Switch
-          onChange={(event): void =>
-            setValue('autoApproveCost', event.target.checked, {
-              shouldValidate: true
-            })
-          }
-          value={getValues('autoApproveCost')}
-        />
       </div>
 
       <FormButton isSubmitting={isSubmitting} label={'Cadastrar'} />

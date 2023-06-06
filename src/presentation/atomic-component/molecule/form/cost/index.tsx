@@ -13,9 +13,9 @@ import { useCost } from 'data/use-case';
 import { useEffect, useState } from 'react';
 import { useFindDriverQuery } from 'infra/cache';
 import type { FC } from 'react';
+import type { FindDriverResponse } from 'domain/models';
 import type { SelectValues } from 'presentation/atomic-component/atom';
 import type { UseQueryResult } from 'react-query';
-import type { VehicleFleetResponse } from 'domain/models';
 
 interface CostFormProps {
   closeModal: () => void;
@@ -31,7 +31,7 @@ export const CostForm: FC<CostFormProps> = ({ closeModal, vehicleId }) => {
 
   const [list, setList] = useState<SelectValues[]>([]);
 
-  let driverQuery: UseQueryResult<VehicleFleetResponse> | null = null;
+  let driverQuery: UseQueryResult<FindDriverResponse> | null = null;
 
   const { role, id } = getUser();
 

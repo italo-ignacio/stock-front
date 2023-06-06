@@ -1,21 +1,12 @@
-import { QueryName, apiPaths } from 'main/config';
-import { api } from 'infra/http';
-import { useQuery } from 'react-query';
+import { useFindQuery } from 'infra/cache/queries/default-query';
+import type { Driver, FindDriverResponse } from 'domain/models';
 import type { UseQueryResult } from 'react-query';
-import type { VehicleFleetResponse } from 'domain/models/vehicle-fleet';
-
-interface useFindDriverQueryProps {
-  page: number;
-  search?: string;
-}
+import type { useFindQueryProps } from 'infra/cache/queries/default-query';
 
 export const useFindDriverQuery = ({
-  page,
-  search
-}: useFindDriverQueryProps): UseQueryResult<VehicleFleetResponse> =>
-  useQuery([QueryName.driver, page, search], () =>
-    api.get({
-      queryParams: { limit: 10, page, search },
-      route: apiPaths.driver.all
-    })
-  );
+  ...props
+}: useFindQueryProps): UseQueryResult<FindDriverResponse> =>
+  useFindQuery<FindDriverResponse>({ ...props, route: 'driver' });
+
+export const useFindOneDriverQuery = ({ ...props }: useFindQueryProps): UseQueryResult<Driver> =>
+  useFindQuery<Driver>({ ...props, route: 'driver' });

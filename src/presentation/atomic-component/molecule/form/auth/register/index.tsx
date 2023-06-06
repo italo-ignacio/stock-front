@@ -2,14 +2,11 @@ import { FormButton, LabelInput, ValidatePassword } from 'presentation/atomic-co
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useRegister } from 'data/use-case';
 import { useState } from 'react';
-import type { Dispatch, FC, SetStateAction } from 'react';
+import type { FC } from 'react';
 
-interface RegisterFormProps {
-  setIsLogin: Dispatch<SetStateAction<boolean>>;
-}
-export const RegisterForm: FC<RegisterFormProps> = ({ setIsLogin }) => {
+export const RegisterForm: FC = () => {
   const { handleSubmit, onSubmit, register, errors, setValue, getValues, isSubmitting } =
-    useRegister({ setIsLogin });
+    useRegister();
   const [showPassword, setShowPassword] = useState(false);
   const [showValidatePassword, setShowValidatePassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
@@ -32,7 +29,6 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setIsLogin }) => {
       </div>
 
       <LabelInput
-        color={'secondary'}
         error={!!errors.name}
         onChange={({ target }): void => setValue('name', target.value, { shouldValidate: true })}
         placeholder={'Nome'}
@@ -40,7 +36,6 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setIsLogin }) => {
       />
 
       <LabelInput
-        color={'secondary'}
         error={!!errors.email}
         onChange={({ target }): void => setValue('email', target.value, { shouldValidate: true })}
         placeholder={'E-mail'}
@@ -50,7 +45,6 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setIsLogin }) => {
 
       <LabelInput
         EndIcon={showPassword ? VisibilityOff : Visibility}
-        color={'secondary'}
         error={!!errors.password}
         handleEndFunction={handleClickShowPassword}
         onChange={({ target }): void =>
@@ -72,7 +66,6 @@ export const RegisterForm: FC<RegisterFormProps> = ({ setIsLogin }) => {
 
       <LabelInput
         EndIcon={showPasswordConfirmation ? VisibilityOff : Visibility}
-        color={'secondary'}
         error={!!errors.passwordConfirmation}
         handleEndFunction={handleClickShowPasswordConfirmation}
         onChange={({ target }): void =>

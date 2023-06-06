@@ -3,13 +3,13 @@ import { ListItemButton } from '@mui/material';
 import { QueryName, apiPaths, paths } from 'main/config';
 import { useNavigate } from 'react-router-dom';
 import type { FC } from 'react';
+import type { Fleet } from 'domain/models';
 
-interface VehicleFleetCardProps {
-  id: string;
-  name: string;
+interface FleetCardProps extends Fleet {
+  remove?: boolean;
 }
 
-export const VehicleFleetCard: FC<VehicleFleetCardProps> = ({ name, id }) => {
+export const FleetCard: FC<FleetCardProps> = ({ ...props }) => {
   const navigate = useNavigate();
 
   return (
@@ -18,18 +18,18 @@ export const VehicleFleetCard: FC<VehicleFleetCardProps> = ({ name, id }) => {
     >
       <ListItemButton
         onClick={(): void => {
-          navigate(paths.fleet(id));
+          navigate(paths.fleet(props.id));
         }}
       >
-        {name}
+        {props.name}
       </ListItemButton>
 
       <div className={'p-1'}>
         <DeleteConfirmationModal
-          highlightedText={name}
-          id={id}
-          queryName={QueryName.vehicleFleet}
-          route={apiPaths.vehicleFleet}
+          highlightedText={props.name}
+          id={props.id}
+          queryName={QueryName.fleet}
+          route={apiPaths.fleet}
           successMessage={'Frota deletado com sucesso'}
           text={'Tem certeza que deseja excluir a frota ?'}
         />

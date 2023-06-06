@@ -12,7 +12,7 @@ export const DriverQuery: FC = () => {
       <QueryManager query={driverQuery}>
         <div className={'flex flex-wrap gap-2'}>
           {driverQuery.data?.payload.map((driver) => (
-            <DriverCard key={driver.id} id={driver.id} name={driver.name} />
+            <DriverCard key={driver.id} {...driver} />
           ))}
         </div>
       </QueryManager>
