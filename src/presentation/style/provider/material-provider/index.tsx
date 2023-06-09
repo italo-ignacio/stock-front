@@ -1,5 +1,6 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable max-lines */
+import { RadioButtonCheckedTwoTone } from '@mui/icons-material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { colors } from 'presentation/style/palette';
 import { outlinedInputClasses } from '@mui/material';
@@ -45,6 +46,25 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
         defaultProps: {
           variant: 'contained'
         }
+      },
+      MuiRadio: {
+        defaultProps: {
+          checkedIcon: <RadioButtonCheckedTwoTone />,
+          color: 'primary'
+        },
+        variants: [
+          {
+            props: { color: 'primary' },
+            style: {
+              svg: {
+                circle: {
+                  // eslint-disable-next-line id-length
+                  r: 6.5
+                }
+              }
+            }
+          }
+        ]
       },
       MuiTextField: {
         styleOverrides: {
@@ -121,7 +141,6 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
           }
         }
       },
-
       MuiOutlinedInput: {
         styleOverrides: {
           notchedOutline: {
@@ -137,6 +156,26 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             color: 'white'
           }
         }
+      },
+      MuiRadio: {
+        defaultProps: {
+          checkedIcon: <RadioButtonCheckedTwoTone />,
+          color: 'primary'
+        },
+        variants: [
+          {
+            props: { color: 'primary' },
+            style: {
+              color: 'white !important',
+              svg: {
+                circle: {
+                  // eslint-disable-next-line id-length
+                  r: 6.5
+                }
+              }
+            }
+          }
+        ]
       },
       MuiTextField: {
         styleOverrides: {

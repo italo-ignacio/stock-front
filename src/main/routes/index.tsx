@@ -4,6 +4,8 @@ import {
   FleetContent,
   MyDriversContent,
   MyFleetsContent,
+  MyWorksContent,
+  NewWorkContent,
   VehicleContent
 } from 'presentation/environment';
 import { AuthTemplate, MainTemplate } from 'presentation/atomic-component/template';
@@ -32,6 +34,8 @@ const RouterConfig: FC = () => (
             <Route element={<MyDriversContent />} path={routePaths.myDrivers} />
             <Route element={<FleetContent />} path={routePaths.fleet} />
             <Route element={<VehicleContent />} path={routePaths.vehicle} />
+            <Route element={<MyWorksContent />} path={routePaths.myWorks} />
+            <Route element={<NewWorkContent />} path={routePaths.newWork} />
           </Route>
         </Route>
 

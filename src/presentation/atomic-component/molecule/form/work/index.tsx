@@ -1,98 +1,105 @@
-import { DriverModal } from 'presentation/atomic-component/molecule/modal/driver';
-import { FormButton, LabelInput, Select, SelectImage } from 'presentation/atomic-component/atom';
-import { convertList, convertToSelect } from 'main/utils';
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  ListItemButton,
+  Radio,
+  RadioGroup
+} from '@mui/material';
+import { FormButton } from 'presentation/atomic-component/atom';
+import { StartLocationsModal } from 'presentation/atomic-component/molecule/modal/start-locations';
+import { resolverError } from 'main/utils';
 import { useEffect, useState } from 'react';
-import { useFindDriverQuery } from 'infra/cache';
-import { useVehicle } from 'data/use-case';
+import { useFindStartLocationsQuery } from 'infra/cache';
+import { useWork } from 'data/use-case';
 import type { FC } from 'react';
-import type { SelectValues } from 'presentation/atomic-component/atom';
+import type { Location } from 'domain/models';
 
-interface WorkFormProps {
-  closeModal: () => void;
-  vehicleId: string;
-}
+export const WorkForm: FC = () => {
+  const { handleSubmit, onSubmit, isSubmitting } = useWork();
+  // const { loadError } = useJsApiLoader({
+  //   googleMapsApiKey: import.meta.env.VITE_GOOGLE_KEY,
+  //   libraries: ['places']
+  // });
 
-export const WorkForm: FC<WorkFormProps> = ({ closeModal, vehicleId }) => {
-  const { handleSubmit, onSubmit, register, errors, setValue, isSubmitting } = useVehicle({
-    closeModal
-  });
+  // eslint-disable-next-line unused-imports/no-unused-vars
+  const [startLocationSelected, setStartLocationSelected] = useState<string | null>(null);
 
-  const [valueInput, setValueInput] = useState<SelectValues[]>([]);
+  const [locationsArray, setLocationsArray] = useState<Location[]>([]);
 
-  const [list, setList] = useState<SelectValues[]>([]);
-
-  const driverQuery = useFindDriverQuery({
-    page: 1
-  });
+  const startLocationsQuery = useFindStartLocationsQuery({});
 
   useEffect(() => {
-    if (driverQuery.isSuccess && driverQuery.data.payload)
-      setList(convertToSelect(driverQuery.data.payload));
-  }, [driverQuery.data, driverQuery.isSuccess]);
+    try {
+      const list = JSON.parse(startLocationsQuery.data?.payload.startLocations ?? '[]');
 
-  useEffect(() => {
-    setValue('fleetId', vehicleId, {
-      shouldValidate: true
-    });
-  }, [vehicleId, setValue]);
+      setLocationsArray(list);
+      setStartLocationSelected(JSON.stringify(list[0]));
+    } catch (error) {
+      resolverError(error, 'Erro ao carregar página');
+    }
+  }, [startLocationsQuery.data, startLocationsQuery.isSuccess]);
 
-  useEffect(() => {
-    setValue('driverList', convertList(valueInput), {
-      shouldValidate: true
-    });
-  }, [valueInput, setValue]);
-
+  // if (loadError) return <div>Erro ao carregar o google maps</div>;
   return (
-    <form
-      className={'flex flex-col gap-4 w-[100%] ml-auto mr-auto'}
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <SelectImage
-        onChange={(file): void => {
-          setValue('image', file, {
-            shouldValidate: true
-          });
-        }}
-      />
-
-      <LabelInput
-        error={!!errors.name}
-        onChange={({ target }): void => setValue('name', target.value, { shouldValidate: true })}
-        placeholder={'Nome'}
-        register={register('name')}
-      />
-
-      <LabelInput
-        error={!!errors.licensePlate}
-        onChange={({ target }): void =>
-          setValue('licensePlate', target.value, { shouldValidate: true })
-        }
-        placeholder={'Placa'}
-        register={register('licensePlate')}
-      />
-
-      <LabelInput
-        error={!!errors.type}
-        onChange={({ target }): void => setValue('type', target.value, { shouldValidate: true })}
-        placeholder={'Tipo'}
-        register={register('type')}
-      />
-
-      <div className={'grid grid-cols-[67%_30%] gap-2'}>
-        <Select
-          change={(value): void => {
-            setValueInput(value as SelectValues[]);
-          }}
-          isMultiple
-          label={'Motoristas'}
-          options={list}
-          valueInput={valueInput}
-        />
-
-        <DriverModal />
+    <>
+      <div className={'hidden'}>
+        <StartLocationsModal id={'start-locations-modal-button'} withGoogle={false} />
       </div>
 
-      <FormButton isSubmitting={isSubmitting} label={'Cadastrar'} />
-    </form>
+      <form
+        className={'flex flex-col gap-4 w-[100%] h-full mx-auto'}
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <FormControl>
+          <div className={'flex justify-between items-center pl-4'}>
+            <h2 className={'text-lg font-medium'}>Local de saída</h2>
+
+            {locationsArray && locationsArray.length > 0 ? (
+              <Button
+                onClick={(): void => {
+                  document.getElementById('start-locations-modal-button')?.click();
+                }}
+              >
+                Editar locais
+              </Button>
+            ) : null}
+          </div>
+
+          {locationsArray && locationsArray.length > 0 ? (
+            <RadioGroup
+              onChange={(event): void => {
+                setStartLocationSelected(event.target.value);
+              }}
+              value={startLocationSelected}
+            >
+              {locationsArray.map((startLocation) => (
+                <FormControlLabel
+                  key={startLocation.description}
+                  control={<Radio />}
+                  label={startLocation.description}
+                  value={JSON.stringify(startLocation)}
+                />
+              ))}
+            </RadioGroup>
+          ) : (
+            <div className={'mt-5 border-2 border-secondary rounded-md'}>
+              <ListItemButton
+                className={'font-medium'}
+                onClick={(): void => {
+                  document.getElementById('start-locations-modal-button')?.click();
+                }}
+              >
+                Cadastrar novo local de saída
+              </ListItemButton>
+            </div>
+          )}
+        </FormControl>
+
+        <div className={'mt-auto'}>
+          <FormButton isSubmitting={isSubmitting} label={'Cadastrar'} />
+        </div>
+      </form>
+    </>
   );
 };

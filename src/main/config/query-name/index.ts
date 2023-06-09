@@ -4,5 +4,7 @@ export enum QueryName {
   account = 'account',
   driver = 'driver',
   work = 'work',
+  client = 'client',
+  startLocations = 'startLocations',
   cost = 'cost'
 }

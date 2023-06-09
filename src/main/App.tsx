@@ -1,5 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { ToastContainer } from 'react-toastify';
 import { dimensions } from './config';
 import { queryClient } from 'infra/lib';
@@ -22,8 +23,7 @@ const App: FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Router />
-
-      {/* <ReactQueryDevtools initialIsOpen={false} position={'bottom-right'} /> */}
+      <ReactQueryDevtools initialIsOpen={false} position={'bottom-right'} />
 
       <ToastContainer
         autoClose={3000}
@@ -32,7 +32,7 @@ const App: FC = () => {
         hideProgressBar={false}
         limit={4}
         pauseOnHover
-        position={width >= dimensions.laptop ? 'bottom-right' : 'bottom-right'}
+        position={width >= dimensions.laptop ? 'bottom-right' : 'top-right'}
         style={{
           padding: '12px'
         }}

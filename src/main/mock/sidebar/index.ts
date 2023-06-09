@@ -6,6 +6,10 @@ export const SidebarItems = [
     name: 'Dashboard'
   },
   {
+    link: paths.myWorks,
+    name: 'Minhas entregas'
+  },
+  {
     link: paths.myFleets,
     name: 'Minhas frotas'
   },

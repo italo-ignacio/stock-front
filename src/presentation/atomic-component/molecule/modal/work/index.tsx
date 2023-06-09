@@ -9,7 +9,7 @@ interface WorkModalProps {
   vehicleId: string;
 }
 
-export const WorkModal: FC<WorkModalProps> = ({ vehicleId }) => {
+export const WorkModal: FC<WorkModalProps> = () => {
   const { closeModal, isOpen, openModal } = useModal();
 
   return (
@@ -25,7 +25,7 @@ export const WorkModal: FC<WorkModalProps> = ({ vehicleId }) => {
       }
       title={'Novo trabalho'}
     >
-      <WorkForm closeModal={closeModal} vehicleId={vehicleId} />
+      <WorkForm />
     </Modal>
   );
 };

@@ -5,7 +5,7 @@ import type { UseQueryResult } from 'react-query';
 import type { listQuery } from 'main/config';
 
 export interface useFindQueryProps {
-  page: number;
+  page?: number;
   params?: object;
   id?: string;
 }

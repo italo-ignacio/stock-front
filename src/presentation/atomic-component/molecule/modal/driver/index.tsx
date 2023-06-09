@@ -1,14 +1,15 @@
 import { Add } from '@mui/icons-material';
 import { DriverForm } from 'presentation/atomic-component/molecule/form/driver';
-import { ListItemButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import { Modal } from 'presentation/atomic-component/atom';
 import { useModal } from 'data/hooks';
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 
 interface DriverModalProps {
-  openElement?: ReactNode;
+  id?: string;
 }
-export const DriverModal: FC<DriverModalProps> = ({ openElement }) => {
+
+export const DriverModal: FC<DriverModalProps> = ({ id }) => {
   const { closeModal, isOpen, openModal } = useModal();
 
   return (
@@ -18,24 +19,9 @@ export const DriverModal: FC<DriverModalProps> = ({ openElement }) => {
       isOpen={isOpen}
       openModal={openModal}
       openModalElement={
-        openElement ? (
-          <div className={'flex'} onClick={(): void => openModal()}>
-            {openElement}
-          </div>
-        ) : (
-          <ListItemButton
-            className={'flex gap-1 items-center h-[56px] dark:text-white'}
-            onClick={(): void => {
-              openModal();
-            }}
-            sx={{
-              padding: 0
-            }}
-          >
-            <Add />
-            Motorista
-          </ListItemButton>
-        )
+        <IconButton id={id} onClick={(): void => openModal()}>
+          <Add className={'text-primary dark:text-white'} />
+        </IconButton>
       }
       title={'Novo motorista'}
     >

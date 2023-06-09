@@ -1,19 +1,24 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
 export enum routePaths {
-  dashboard = '/dashboard',
   login = '/',
+  dashboard = '/dashboard',
+  myWorks = '/minhas-entregas',
+  newWork = '/nova-entrega',
   myFleets = '/minhas-frotas',
-  myDrivers = '/meus-motoristas',
   fleet = '/minhas-frotas/:fleetId',
-  vehicle = '/minhas-frotas/:fleetId/:vehicleId'
+  vehicle = '/minhas-frotas/:fleetId/:vehicleId',
+  myDrivers = '/meus-motoristas'
 }
 
 export const paths = {
-  dashboard: '/dashboard',
-  fleet: (fleetId: string): string => `/minhas-frotas/${fleetId}`,
   login: '/',
-  myDrivers: '/meus-motoristas',
+  dashboard: '/dashboard',
+  myWorks: '/minhas-entregas',
+  newWork: '/nova-entrega',
   myFleets: '/minhas-frotas',
-  vehicle: (fleetId: string, vehicleId: string): string => `/minhas-frotas/${fleetId}/${vehicleId}`
+  fleet: (fleetId: string): string => `/minhas-frotas/${fleetId}`,
+  vehicle: (fleetId: string, vehicleId: string): string => `/minhas-frotas/${fleetId}/${vehicleId}`,
+  myDrivers: '/meus-motoristas'
 };
 
 export const apiPaths = {
@@ -23,6 +28,7 @@ export const apiPaths = {
     account: '/auth/account',
     driver: '/auth/driver'
   },
+  client: '/client',
   cost: '/cost',
   disableDriver: '/driver/disable',
   driver: '/driver',
@@ -33,7 +39,16 @@ export const apiPaths = {
   },
   refreshToken: '/auth/refresh-token',
   vehicle: '/vehicle',
-  work: '/work'
+  work: '/work',
+  startLocations: '/start-locations'
 };
 
-export type listQuery = 'account' | 'cost' | 'driver' | 'fleet' | 'vehicle' | 'work';
+export type listQuery =
+  | 'account'
+  | 'client'
+  | 'cost'
+  | 'driver'
+  | 'fleet'
+  | 'startLocations'
+  | 'vehicle'
+  | 'work';
